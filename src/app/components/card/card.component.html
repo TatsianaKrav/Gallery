@@ -1,0 +1,11 @@
+<div class="card">
+    <img class="card-image" [src]="cardElement?.results![0].image">
+    <div class="card-info">
+        <p class="card-name">{{cardElement?.results![0].name}}</p>
+        <p> <span>Status:</span> {{cardElement?.results![0].status}} </p>
+        <p> <span>Species:</span> {{cardElement?.results![0].species}}</p>
+        <p> <span>Gender:</span> {{cardElement?.results![0].gender}}</p>
+        <p> <span>Origin: </span> {{cardElement?.results![0].origin.name}}</p>
+        <p> <span>Location:</span> {{cardElement?.results![0].location.name}}</p>
+    </div>
+</div>

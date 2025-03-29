@@ -1,0 +1,27 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    .card-image {
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .card-info {
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .card-name {
+            font-weight: bold;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    }
+}
