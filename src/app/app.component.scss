@@ -1,8 +1,20 @@
-
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     font-family: Rawrote, sans-serif;
+    gap: 10px;
+    max-width: 1440px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    .all-cards {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
 }
