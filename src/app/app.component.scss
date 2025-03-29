@@ -10,6 +10,16 @@
     box-sizing: border-box;
     margin: 0 auto;
 
+    .search {
+        width: 250px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid black;
+        outline: none;
+        font-family: Rawrote, sans-serif;
+        font-size: 18px;
+    }
+
     .all-cards {
         display: flex;
         align-items: center;
