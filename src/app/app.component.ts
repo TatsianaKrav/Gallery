@@ -9,11 +9,11 @@ import { ErrorComponent } from './components/error/error.component';
 import { ErrorService } from './services/error.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CardComponent, NgFor, CommonModule, FormsModule, ErrorComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    imports: [CardComponent, NgFor, CommonModule, ErrorComponent, FormsModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   cards$: Observable<ICard[]>;
