@@ -1,8 +1,0 @@
-<div class="container">
-  <h1 class="gallery-name">The Rick and Morty</h1>
-  <input type="text" class="search" placeholder="Character name" [(ngModel)]="name" (change)="updateCards()">
-  <div class="all-cards">
-    <app-error></app-error>
-    <app-card *ngFor="let card of cards$ | async" [card]="card"></app-card>
-  </div>
-</div>
