@@ -1,5 +1,5 @@
 import { Component, input, OnInit } from '@angular/core';
-import { ICard } from '../../utils/interfaces';
+import { CharacterModel } from '../../models/character-model';
 
 @Component({
     selector: 'app-card',
@@ -8,11 +8,7 @@ import { ICard } from '../../utils/interfaces';
     templateUrl: './card.component.html',
     styleUrl: './card.component.scss'
 })
-export class CardComponent implements OnInit {
-  readonly card = input<ICard>();
-  public cardElement: ICard | undefined;
-
-  ngOnInit(): void {
-    this.cardElement = this.card();
-  }
+export class CardComponent {
+  readonly card = input.required<CharacterModel>();
+ 
 }
