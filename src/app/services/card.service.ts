@@ -20,10 +20,9 @@ export class CardService {
     return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}/character`);
   }
 
-  getCharacter(name: string): Observable<ICard[]> {
-    return this.http.get<ICardResponse>(`${environment.API_URL}/character/?name=${name}`)
+  getCharacter(name: string): Observable<CommonPaginationResponse<CharacterModel>> {
+    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}/character/?name=${name}`)
       .pipe(
-        map((data) => data.results),
         catchError(this.errorHandler.bind(this))
       )
   }
