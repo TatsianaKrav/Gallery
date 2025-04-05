@@ -6,11 +6,12 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorService } from './services/error.service';
 import { debounceTime } from 'rxjs';
+import { PopupComponent } from './components/popup/popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CardComponent, CommonModule, ErrorComponent, FormsModule, ReactiveFormsModule],
+  imports: [CardComponent, CommonModule, ErrorComponent, FormsModule, ReactiveFormsModule, PopupComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

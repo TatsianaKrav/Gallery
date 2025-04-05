@@ -3,8 +3,11 @@
   <input type="text" class="search" placeholder="Character name" [formControl]="nameControl">
   <div class="all-cards">
     <app-error></app-error>
+
     @for (card of (cards$ | async)?.results; track $index) {
     <app-card [card]="card"></app-card>
     }
+
+    <app-popup></app-popup>
   </div>
 </div>
