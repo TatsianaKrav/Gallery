@@ -9,25 +9,24 @@ import { ErrorComponent } from './components/error/error.component';
 import { ErrorService } from './services/error.service';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [CardComponent, NgFor, CommonModule, ErrorComponent, FormsModule],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  standalone: true,
+  imports: [CardComponent, CommonModule, ErrorComponent, FormsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  cards$: Observable<ICard[]>;
+  cards$ = this.cardService.getAllCards();
   name = '';
 
   constructor(private cardService: CardService, private errorService: ErrorService) {
-    this.cards$ = this.cardService.getAllCards();
   }
 
   updateCards() {
-    this.cards$ = this.cardService.getCharacter(this.name.toLowerCase());
+/*     this.cards$ = this.cardService.getCharacter(this.name.toLowerCase());
 
     if (!this.name) {
       this.errorService.clear();
-    }
+    } */
   }
 }

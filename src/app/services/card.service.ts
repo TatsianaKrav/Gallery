@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { ICard, ICardResponse } from '../utils/interfaces';
 import { ErrorService } from './error.service';
+import { environment } from '../../environments/environment.development';
+import { CommonPaginationResponse } from '../models/common-pagination-response';
+import { CharacterModel } from '../models/character-model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +16,12 @@ export class CardService {
     private errorService: ErrorService
   ) { }
 
-  getAllCards(): Observable<ICard[]> {
-    return this.http.get<ICardResponse>("https://rickandmortyapi.com/api/character")
-      .pipe(
-        map((data) => data.results.slice(0, 100))
-      )
+  getAllCards(): Observable<CommonPaginationResponse<CharacterModel>> {
+    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}/character`);
   }
 
   getCharacter(name: string): Observable<ICard[]> {
-    return this.http.get<ICardResponse>(`https://rickandmortyapi.com/api/character/?name=${name}`)
+    return this.http.get<ICardResponse>(`${environment.API_URL}/character/?name=${name}`)
       .pipe(
         map((data) => data.results),
         catchError(this.errorHandler.bind(this))
