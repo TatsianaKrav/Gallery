@@ -6,6 +6,7 @@ import { ErrorService } from './error.service';
 import { environment } from '../../environments/environment.development';
 import { CommonPaginationResponse } from '../models/common-pagination-response';
 import { CharacterModel } from '../models/character-model';
+import { i } from '@angular/core/weak_ref.d-Bp6cSy-X';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,18 @@ export class CardService {
   ) { }
 
   getAllCards(): Observable<CommonPaginationResponse<CharacterModel>> {
-    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}/character`);
+    return this.http.get<CommonPaginationResponse<CharacterModel>>(environment.API_URL);
   }
 
   getCharacter(name: string): Observable<CommonPaginationResponse<CharacterModel>> {
-    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}/character/?name=${name}`)
+    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}?name=${name}`)
       .pipe(
         catchError(this.errorHandler.bind(this))
       )
+  }
+
+  getCharacterById(id: number): Observable<CommonPaginationResponse<CharacterModel>> {
+    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}${id}`)
   }
 
   private errorHandler(error: HttpErrorResponse) {

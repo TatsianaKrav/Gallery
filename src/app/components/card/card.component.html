@@ -1,7 +1,7 @@
-<div class="card">
-    @let cardObject = card();
+@let cardObject = card();
 
-    @if(cardObject) {
+@if(cardObject) {
+<div class="card" [id]="cardObject.id" (click)="handleCard($event)">
     <img class="card-image" [src]="cardObject.image">
     <div class="card-info">
         <p class="card-name">{{cardObject.name}}</p>
@@ -11,5 +11,5 @@
         <p> <span>Origin: </span> {{cardObject.origin.name}}</p>
         <p> <span>Location:</span> {{cardObject.location.name}}</p>
     </div>
-    }
 </div>
+}

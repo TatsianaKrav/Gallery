@@ -7,6 +7,8 @@
     box-sizing: border-box;
     width: 250px;
     height: 350px;
+    transition: all 0.5s linear;
+    cursor: pointer;
 
     .card-image {
         height: 150px;
@@ -27,5 +29,9 @@
         span {
             font-weight: bold;
         }
+    }
+
+    &:hover {
+        transform: scale(1.03);
     }
 }
