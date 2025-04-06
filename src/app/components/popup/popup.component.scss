@@ -13,13 +13,12 @@
     visibility: hidden;
     font-family: Rawrote, sans-serif;
     cursor: pointer;
-    transition: all 0.7s ease;
+    transition: all 0.5s linear;
 
     .popup {
         cursor: default;
         position: relative;
-        width: 50%;
-        border: 2px solid black;
+        width: 40%;
 
         .popup-actions {
             display: flex;
@@ -27,6 +26,9 @@
             justify-content: space-between;
             float: right;
             gap: 10px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
 
             .btn {
                 padding: 5px 10px;
@@ -52,7 +54,34 @@
             }
         }
 
+        .card {
+            width: 100%;
+            font-size: 20px;
+            background-color: #fff;
 
+            .card-image {
+                height: 300px;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .card-info {
+                padding: 10px 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                background-color: #fff;
+
+                .card-name {
+                    font-weight: bold;
+                }
+
+                span {
+                    font-weight: bold;
+                }
+            }
+        }
     }
 
     &.open {

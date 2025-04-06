@@ -7,6 +7,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { ErrorService } from './services/error.service';
 import { debounceTime } from 'rxjs';
 import { PopupComponent } from './components/popup/popup.component';
+import { PopupService } from './services/popup.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,9 @@ export class AppComponent {
   protected readonly nameControl = new FormControl('');
   cards$ = this.cardService.getAllCards();
 
-  constructor(private cardService: CardService, private errorService: ErrorService) {
+  constructor(private cardService: CardService, private errorService: ErrorService,
+    public popupService: PopupService
+  ) {
     this.nameControl.valueChanges
       .pipe(
         debounceTime(500)

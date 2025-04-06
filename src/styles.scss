@@ -7,3 +7,12 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    position: relative;
+    overflow-y: auto;
+
+    &.blocked {
+        overflow-y: hidden;
+    }
+}

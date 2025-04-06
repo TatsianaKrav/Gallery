@@ -28,8 +28,8 @@ export class CardService {
       )
   }
 
-  getCharacterById(id: number): Observable<CommonPaginationResponse<CharacterModel>> {
-    return this.http.get<CommonPaginationResponse<CharacterModel>>(`${environment.API_URL}${id}`)
+  getCharacterById(id: number): Observable<CharacterModel> {
+    return this.http.get<CharacterModel>(`${environment.API_URL}${id}`)
   }
 
   private errorHandler(error: HttpErrorResponse) {

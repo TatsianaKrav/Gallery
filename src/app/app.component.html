@@ -1,13 +1,14 @@
+
 <div class="container">
-  <h1 class="gallery-name">The Rick and Morty</h1>
-  <input type="text" class="search" placeholder="Character name" [formControl]="nameControl">
-  <div class="all-cards">
-    <app-error></app-error>
+    <h1 class="gallery-name">The Rick and Morty</h1>
+    <input type="text" class="search" placeholder="Character name" [formControl]="nameControl">
+    <div class="all-cards">
+      <app-error></app-error>
 
-    @for (card of (cards$ | async)?.results; track $index) {
-    <app-card [card]="card"></app-card>
-    }
+      @for (card of (cards$ | async)?.results; track $index) {
+      <app-card [card]="card"></app-card>
+      }
 
-    <app-popup></app-popup>
+      <app-popup></app-popup>
+    </div>
   </div>
-</div>
