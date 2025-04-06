@@ -16,8 +16,13 @@ export class PopupComponent {
 
   }
 
-  close() {
-    this.popupService.handle();
+  close(event: Event) {
+    event.stopPropagation();
+    const target = event.target;
+
+    if(target && target instanceof HTMLElement) {
+      this.popupService.handle(target);
+    }
   }
 
 }

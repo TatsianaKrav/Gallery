@@ -21,15 +21,14 @@ export class CardComponent {
   handleCard(event: Event): void {
     const currentCard = event.currentTarget;
     const target = event.target;
-
     let idCharacter: string | null;
 
-    if (currentCard && currentCard instanceof HTMLElement) {
+    if (currentCard && currentCard instanceof HTMLElement && target instanceof HTMLElement) {
       idCharacter = currentCard.getAttribute('id');
 
       if (idCharacter) {
         this.cardService.getCharacterById(+idCharacter).subscribe(value => {
-          this.popupService.handle(value);
+          this.popupService.handle(target, value);
         });
       }
     }

@@ -14,8 +14,12 @@ export class PopupService {
   constructor() {
   }
 
-  handle(character?: CharacterModel) {
+  handle(target: HTMLElement, character?: CharacterModel) {
     const currentValue = this.popup$.getValue();
+    const className = target.className === 'popup-wrapper open' || target.className === 'close' ? target.className : null;
+
+    if (!className && currentValue) return;
+
     this.popup$.next(!currentValue);
     this.body.classList.toggle('blocked');
 

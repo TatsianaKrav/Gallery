@@ -44,6 +44,27 @@
             .close {
                 width: 25px;
                 height: 25px;
+                cursor: pointer;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    right: 10px;
+                    width: 2px;
+                    height: 25px;
+                    background-color: black;
+                    transform: rotate(45deg);
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    height: 25px;
+                    right: 10px;
+                    background-color: black;
+                    transform: rotate(-45deg);
+                }
 
                 svg {
                     display: inline-block;
