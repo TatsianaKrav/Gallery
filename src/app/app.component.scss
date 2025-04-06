@@ -26,5 +26,10 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 30px;
+
+        .item {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
