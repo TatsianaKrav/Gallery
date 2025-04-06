@@ -46,6 +46,7 @@ export class AppComponent {
 
     this.nameControl.valueChanges
       .pipe(
+        tap(() => this.isLoading = true),
         debounceTime(500)
       )
       .subscribe((value) => {
@@ -53,6 +54,7 @@ export class AppComponent {
         if (value) {
           this.cards$ = cardService.getCharacter(value?.toLowerCase());
           this.errorService.clear();
+          this.isLoading = false;
         }
       });
   }

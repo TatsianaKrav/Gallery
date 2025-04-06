@@ -17,6 +17,4 @@ export interface CharacterModel {
     episode: string[];
     url: string;
     created: string;
-    originName?: string,
-    locationName?: string
 }

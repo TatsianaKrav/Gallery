@@ -7,7 +7,6 @@ import { CharacterModel } from '../models/character-model';
 })
 export class PopupService {
   popup$ = new BehaviorSubject(false);
-  /*   character$: CharacterModel | null = null; */
   character$ = new Subject<CharacterModel>();
   private readonly body = document.body;
 
@@ -17,7 +16,10 @@ export class PopupService {
 
   handle(target: HTMLElement, character?: CharacterModel) {
     const currentValue = this.popup$.getValue();
-    const className = target.className === 'popup-wrapper open' || target.className === 'close' ? target.className : null;
+    const className =
+      target.className === 'popup-wrapper open' || target.className === 'close'
+        ? target.className
+        : null;
 
     if (!className && currentValue) return;
 

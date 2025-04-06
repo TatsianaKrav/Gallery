@@ -10,7 +10,6 @@
         @let character = popupService.character$ | async;
 
         @if(character && form) {
-        <!-- <app-card [card] = "character"></app-card> -->
         <div class="card" [id]="character.id">
             <img class="card-image" [src]="character.image">
             <div class="card-info">

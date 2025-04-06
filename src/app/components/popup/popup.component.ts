@@ -17,7 +17,7 @@ import { CommonPaginationResponse } from '../../models/common-pagination-respons
 export class PopupComponent {
   currentCharacter: CharacterModel | null = null;
   updatedCharacter: Partial<CharacterModel> | null = null;
-  info: CommonPaginationResponse<CharacterModel> | null = null;
+  allCardsResponse: CommonPaginationResponse<CharacterModel> | null = null;
   form: FormGroup | null = null;
   isEditable = false;
 
@@ -36,7 +36,7 @@ export class PopupComponent {
 
     this.cardService.allCards$.subscribe(cards => {
       if (cards) {
-        this.info = cards;
+        this.allCardsResponse = cards;
       }
     })
   }
@@ -76,18 +76,18 @@ export class PopupComponent {
     if (this.updatedCharacter) {
       this.form?.patchValue(this.updatedCharacter);
 
-      if (this.info?.results.length) {
-        const currentCard = this.info?.results.find(card => card.id === this.currentCharacter?.id);
+      if (this.allCardsResponse?.results.length) {
+        const currentCard = this.allCardsResponse?.results.find(card => card.id === this.currentCharacter?.id);
 
         if (currentCard && this.updatedCharacter && this.currentCharacter) {
-          const index = this.info?.results.indexOf(currentCard);
-          this.info?.results.splice(index, 1, this.currentCharacter);
+          const index = this.allCardsResponse?.results.indexOf(currentCard);
+          this.allCardsResponse?.results.splice(index, 1, this.currentCharacter);
 
           this.cardService.allCards$.next({
             info: {
-              ...this.info.info
+              ...this.allCardsResponse.info
             },
-            results: this.info.results
+            results: this.allCardsResponse.results
           });
         }
       }

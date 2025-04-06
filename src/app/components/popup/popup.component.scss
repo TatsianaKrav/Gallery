@@ -18,7 +18,10 @@
     .popup {
         cursor: default;
         position: relative;
-        width: 40%;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         .popup-actions {
             display: flex;
@@ -81,42 +84,46 @@
             background-color: #fff;
 
             .card-image {
-                height: 300px;
                 width: 100%;
+                height: 25dvw;
                 object-fit: cover;
                 object-position: center;
             }
 
             .card-info {
                 padding: 10px 15px;
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
                 background-color: #fff;
 
                 .card-name {
                     font-weight: bold;
+                    margin-bottom: 5px;
                 }
 
-                label {
-                    font-weight: bold;
-                }
+                .form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
 
-                input {
-                    border: none;
-                    font-family: Rawrote, sans-serif;
-                    font-size: 20px;
-
-                    &:focus {
-                        outline: none;
-                        border: none;
+                    label {
+                        font-weight: bold;
                     }
 
-                    &.editable {
+                    input {
+                        border: none;
+                        font-family: Rawrote, sans-serif;
+                        font-size: 20px;
+
                         &:focus {
-                            outline: auto;
-                            border: 1px solid black;
-                            border: 5px;
+                            outline: none;
+                            border: none;
+                        }
+
+                        &.editable {
+                            &:focus {
+                                outline: auto;
+                                border: 1px solid black;
+                                border: 5px;
+                            }
                         }
                     }
                 }
