@@ -1,27 +1,40 @@
 <div class="popup-wrapper" [class.open]="popupService.popup$ | async" (click)="close($event)">
     <div class="popup">
         <div class="popup-actions">
-            <button class="view btn">View</button>
-            <button class="edit btn">Edit</button>
+            <button class="edit btn" [disabled]="isEditable"  (click)="updateData()">Edit</button>
+            <button class="view btn" [disabled]="!isEditable" (click)="saveData()">Save</button>
             <div class="close" (click)="close($event)">
             </div>
         </div>
-        
-        @let character = popupService.character$;
-        
-        @if(character) {
-            <!-- <app-card [card] = "character"></app-card> -->
-            <div class="card" [id]="character.id">
-                <img class="card-image" [src]="character.image">
-                <div class="card-info">
-                    <p class="card-name">{{character.name}}</p>
-                    <p> <span>Status:</span> {{character.status}} </p>
-                    <p> <span>Species:</span> {{character.species}}</p>
-                    <p> <span>Gender:</span> {{character.gender}}</p>
-                    <p> <span>Origin: </span> {{character.origin.name}}</p>
-                    <p> <span>Location:</span> {{character.location.name}}</p>
+
+        @let character = popupService.character$ | async;
+
+        @if(character && form) {
+        <!-- <app-card [card] = "character"></app-card> -->
+        <div class="card" [id]="character.id">
+            <img class="card-image" [src]="character.image">
+            <div class="card-info">
+                <p class="card-name">{{character.name}}</p>
+
+                <div class="form" [formGroup]="form">
+                    <label for="status"> Status:
+                        <input type="text" [readonly] = "!isEditable" [class.editable]="isEditable" id="status" formControlName="status">
+                    </label>
+                    <label for="species"> Species:
+                        <input type="text" [readonly] = "!isEditable" [class.editable]="isEditable" id="species" formControlName="species">
+                    </label>
+                    <label for="gender"> Gender:
+                        <input type="text" [readonly] = "!isEditable" [class.editable]="isEditable" id="gender" formControlName="gender">
+                    </label>
+                    <label for="origin"> Origin:
+                        <input type="text" [readonly] = "!isEditable" [class.editable]="isEditable" id="origin" formControlName="origin">
+                    </label>
+                    <label for="location"> Location:
+                        <input type="text" [readonly] = "!isEditable" [class.editable]="isEditable" id="location" formControlName="location">
+                    </label>
                 </div>
             </div>
+        </div>
         }
 
     </div>

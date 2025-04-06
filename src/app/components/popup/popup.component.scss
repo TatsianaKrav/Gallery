@@ -98,8 +98,27 @@
                     font-weight: bold;
                 }
 
-                span {
+                label {
                     font-weight: bold;
+                }
+
+                input {
+                    border: none;
+                    font-family: Rawrote, sans-serif;
+                    font-size: 20px;
+
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+
+                    &.editable {
+                        &:focus {
+                            outline: auto;
+                            border: 1px solid black;
+                            border: 5px;
+                        }
+                    }
                 }
             }
         }

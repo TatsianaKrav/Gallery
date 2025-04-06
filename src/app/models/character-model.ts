@@ -8,7 +8,7 @@ export interface CharacterModel {
     origin: {
         name: string;
         url: string;
-    }
+    } 
     location: {
         name: string;
         url: string;
@@ -17,4 +17,6 @@ export interface CharacterModel {
     episode: string[];
     url: string;
     created: string;
+    originName?: string,
+    locationName?: string
 }

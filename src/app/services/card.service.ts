@@ -1,24 +1,26 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
-import { ICard, ICardResponse } from '../utils/interfaces';
+import { BehaviorSubject, catchError, map, Observable, Subject, tap, throwError } from 'rxjs';
 import { ErrorService } from './error.service';
 import { environment } from '../../environments/environment.development';
 import { CommonPaginationResponse } from '../models/common-pagination-response';
 import { CharacterModel } from '../models/character-model';
-import { i } from '@angular/core/weak_ref.d-Bp6cSy-X';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
+  allCards$ = new BehaviorSubject<CommonPaginationResponse<CharacterModel> | null>(null);
 
   constructor(private http: HttpClient,
     private errorService: ErrorService
   ) { }
 
   getAllCards(): Observable<CommonPaginationResponse<CharacterModel>> {
-    return this.http.get<CommonPaginationResponse<CharacterModel>>(environment.API_URL);
+    return this.http.get<CommonPaginationResponse<CharacterModel>>(environment.API_URL)
+      .pipe(
+        tap(value => this.allCards$.next({ ...value }))
+      )
   }
 
   getCharacter(name: string): Observable<CommonPaginationResponse<CharacterModel>> {

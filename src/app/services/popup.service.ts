@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CharacterModel } from '../models/character-model';
 
 @Injectable({
@@ -7,7 +7,8 @@ import { CharacterModel } from '../models/character-model';
 })
 export class PopupService {
   popup$ = new BehaviorSubject(false);
-  character$: CharacterModel | null = null;
+  /*   character$: CharacterModel | null = null; */
+  character$ = new Subject<CharacterModel>();
   private readonly body = document.body;
 
 
@@ -24,7 +25,7 @@ export class PopupService {
     this.body.classList.toggle('blocked');
 
     if (character) {
-      this.character$ = { ...character };
+      this.character$.next({ ...character });
     }
   }
 }
