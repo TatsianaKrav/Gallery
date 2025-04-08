@@ -1,8 +1,7 @@
+@import '../styles.scss';
+
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+   @include flex-column();
     font-family: Rawrote, sans-serif;
     gap: 10px;
     max-width: 1440px;
@@ -21,15 +20,12 @@
     }
 
     .all-cards {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+       @include flex();
         flex-wrap: wrap;
         gap: 30px;
 
         .item {
-            display: flex;
-            flex-direction: column;
+           @include flex-column();
         }
     }
 }

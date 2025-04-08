@@ -1,6 +1,9 @@
+@import '../../../styles.scss';
+
 .card {
-    display: flex;
-    flex-direction: column;
+    @include flex-column();
+    align-items: normal;
+    justify-content: initial;
     font-size: 16px;
     border-radius: 5px;
     box-shadow: 0px 0 10px #000;
@@ -14,7 +17,6 @@
         transform: scale(1.03);
     }
 
-
     .card-image {
         height: 150px;
         object-fit: cover;
@@ -22,9 +24,9 @@
     }
 
     .card-info {
+        @include flex-column();
+        align-items: flex-start;
         padding: 10px 15px;
-        display: flex;
-        flex-direction: column;
         gap: 5px;
         background-color: #fff;
 

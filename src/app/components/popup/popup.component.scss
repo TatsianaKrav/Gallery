@@ -1,4 +1,7 @@
+@import '../../../styles.scss';
+
 .popup-wrapper {
+    @include flex();
     position: fixed;
     width: 100dvw;
     height: 100dvh;
@@ -6,9 +9,6 @@
     top: 0;
     left: 0;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 0;
     visibility: hidden;
     font-family: Rawrote, sans-serif;
@@ -16,16 +16,13 @@
     transition: all 0.5s linear;
 
     .popup {
+        @include flex();
         cursor: default;
         position: relative;
         width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
         .popup-actions {
-            display: flex;
-            align-items: center;
+           @include flex();
             justify-content: space-between;
             float: right;
             gap: 10px;
@@ -100,8 +97,8 @@
                 }
 
                 .form {
-                    display: flex;
-                    flex-direction: column;
+                    @include flex-column();
+                    align-items: start;
                     gap: 5px;
 
                     label {

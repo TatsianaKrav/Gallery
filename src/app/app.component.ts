@@ -54,8 +54,9 @@ export class AppComponent {
         if (value) {
           this.cards$ = cardService.getCharacter(value?.toLowerCase());
           this.errorService.clear();
-          this.isLoading = false;
-        }
+         
+        } 
+        this.isLoading = false;
       });
   }
 }

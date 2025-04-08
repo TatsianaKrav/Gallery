@@ -16,3 +16,14 @@ body {
         overflow-y: hidden;
     }
 }
+
+@mixin flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-column {
+    @include flex();
+    flex-direction: column;
+}
