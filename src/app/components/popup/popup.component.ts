@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { PopupService } from '../../services/popup.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CharacterModel } from '../../models/character-model';
 import { CardService } from '../../services/card.service';
 import { CommonPaginationResponse } from '../../models/common-pagination-response';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -21,8 +22,10 @@ export class PopupComponent {
   form: FormGroup | null = null;
   isEditable = false;
 
-  constructor(public popupService: PopupService, private cardService: CardService) {
-    this.popupService.character$.subscribe(value => {
+  constructor(public popupService: PopupService, private cardService: CardService, private destroyRef: DestroyRef) {
+    this.popupService.character$
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(value => {
       this.currentCharacter = value;
 
       this.form = new FormGroup({
@@ -34,7 +37,9 @@ export class PopupComponent {
       });
     });
 
-    this.cardService.allCards$.subscribe(cards => {
+    this.cardService.allCards$
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(cards => {
       if (cards) {
         this.allCardsResponse = cards;
       }
@@ -53,7 +58,9 @@ export class PopupComponent {
   updateData(): void {
     this.isEditable = true;
 
-    this.form?.valueChanges.subscribe(value => {
+    this.form?.valueChanges
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(value => {
       this.updatedCharacter = { ...value };
 
       if (this.updatedCharacter && this.currentCharacter) {
