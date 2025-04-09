@@ -6,11 +6,12 @@ import { CharacterModel } from '../../models/character-model';
 import { CardService } from '../../services/card.service';
 import { CommonPaginationResponse } from '../../models/common-pagination-response';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-popup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule],
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.scss'
 })
@@ -29,11 +30,11 @@ export class PopupComponent {
         this.currentCharacter = value;
 
         this.form = new FormGroup({
-          status: new FormControl(this.currentCharacter?.status, { updateOn: 'blur' }),
-          species: new FormControl(this.currentCharacter?.species, { updateOn: 'blur' }),
-          gender: new FormControl(this.currentCharacter?.gender, { updateOn: 'blur' }),
-          origin: new FormControl(this.currentCharacter?.origin.name, { updateOn: 'blur' }),
-          location: new FormControl(this.currentCharacter?.location.name, { updateOn: 'blur' }),
+          status: new FormControl({ value: this.currentCharacter?.status, disabled: !this.isEditable }, { updateOn: 'blur' }),
+          species: new FormControl({ value: this.currentCharacter?.species, disabled: !this.isEditable }, { updateOn: 'blur' }),
+          gender: new FormControl({ value: this.currentCharacter?.gender, disabled: !this.isEditable }, { updateOn: 'blur' }),
+          origin: new FormControl({ value: this.currentCharacter?.origin.name, disabled: !this.isEditable }, { updateOn: 'blur' }),
+          location: new FormControl({ value: this.currentCharacter?.location.name, disabled: !this.isEditable }, { updateOn: 'blur' }),
         });
       });
 
@@ -44,10 +45,18 @@ export class PopupComponent {
           this.allCardsResponse = cards;
         }
       })
+
+
+    this.popupService.popup$.subscribe(state => {
+      if (!state) {
+        this.isEditable = false;
+      }
+    })
   }
 
   updateData(): void {
     this.isEditable = true;
+    this.handleInputsState(true);
 
     this.form?.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -70,6 +79,7 @@ export class PopupComponent {
 
   saveData(): void {
     this.isEditable = false;
+    this.handleInputsState(false);
 
     if (this.updatedCharacter) {
       this.form?.patchValue(this.updatedCharacter);
@@ -89,6 +99,16 @@ export class PopupComponent {
           });
         }
       }
+    }
+  }
+
+  handleInputsState(value: boolean): void {
+    if (this.form) {
+      Object.keys(this.form.controls).forEach(ctrl => {
+        if (this.form) {
+          value ? this.form.controls[ctrl].enable() : this.form.controls[ctrl].disable();
+        }
+      });
     }
   }
 }

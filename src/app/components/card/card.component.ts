@@ -20,7 +20,6 @@ export class CardComponent {
 
   constructor(private cardService: CardService, public popupService: PopupService,
     private dialogService: DialogService) {
-
   }
 
   show(event: Event): void {
