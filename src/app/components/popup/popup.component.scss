@@ -1,135 +1,86 @@
 @import '../../../styles.scss';
 
-.popup-wrapper {
+.popup {
     @include flex();
-    position: fixed;
-    width: 100dvw;
-    height: 100dvh;
-    background-color: rgba(24, 28, 41, 0.8);
-    top: 0;
-    left: 0;
-    z-index: 2;
-    opacity: 0;
-    visibility: hidden;
-    font-family: Rawrote, sans-serif;
-    cursor: pointer;
-    transition: all 0.5s linear;
+    cursor: default;
+    position: relative;
 
-    .popup {
+    .popup-actions {
         @include flex();
-        cursor: default;
-        position: relative;
-        width: 50%;
+        justify-content: space-between;
+        float: right;
+        gap: 10px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
 
-        .popup-actions {
-           @include flex();
-            justify-content: space-between;
-            float: right;
-            gap: 10px;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-
-            .btn {
-                padding: 5px 10px;
-                border-radius: 5px;
-                font-family: Rawrote, sans-serif;
-                outline: none;
-                border: none;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            .close {
-                width: 25px;
-                height: 25px;
-                cursor: pointer;
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    right: 10px;
-                    width: 2px;
-                    height: 25px;
-                    background-color: black;
-                    transform: rotate(45deg);
-                }
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    width: 2px;
-                    height: 25px;
-                    right: 10px;
-                    background-color: black;
-                    transform: rotate(-45deg);
-                }
-
-                svg {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    cursor: pointer;
-                }
-            }
+        .btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: Rawrote, sans-serif;
+            outline: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .card {
-            width: 100%;
-            font-size: 20px;
-            background-color: #fff;
-
-            .card-image {
-                width: 100%;
-                height: 25dvw;
-                object-fit: cover;
-                object-position: center;
-            }
-
-            .card-info {
-                padding: 10px 15px;
-                background-color: #fff;
-
-                .card-name {
-                    font-weight: bold;
-                    margin-bottom: 5px;
-                }
-
-                .form {
-                    @include flex-column();
-                    align-items: start;
-                    gap: 5px;
-
-                    label {
-                        font-weight: bold;
-                    }
-
-                    input {
-                        border: none;
-                        font-family: Rawrote, sans-serif;
-                        font-size: 20px;
-
-                        &:focus {
-                            outline: none;
-                            border: none;
-                        }
-
-                        &.editable {
-                            &:focus {
-                                outline: auto;
-                                border: 1px solid black;
-                                border: 5px;
-                            }
-                        }
-                    }
-                }
-            }
+        .close {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
         }
     }
 
-    &.open {
-        opacity: 1;
-        visibility: visible;
+    .card {
+        width: 100%;
+        font-size: 20px;
+        background-color: #fff;
+
+        .card-image {
+            width: 100%;
+            height: 30dvh;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .card-info {
+            padding: 10px 15px;
+            background-color: #fff;
+
+            .card-name {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form {
+                @include flex-column();
+                align-items: start;
+                gap: 5px;
+
+                label {
+                    font-weight: bold;
+                }
+
+                input {
+                    border: none;
+                    font-family: Rawrote, sans-serif;
+                    font-size: 20px;
+
+                    &:focus {
+                        outline: none;
+                        border: none;
+                    }
+
+                    &.editable {
+                        &:focus {
+                            outline: auto;
+                            border: 1px solid black;
+                            border: 5px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

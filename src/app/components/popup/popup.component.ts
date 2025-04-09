@@ -7,7 +7,6 @@ import { CardService } from '../../services/card.service';
 import { CommonPaginationResponse } from '../../models/common-pagination-response';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-
 @Component({
   selector: 'app-popup',
   standalone: true,
@@ -22,59 +21,51 @@ export class PopupComponent {
   form: FormGroup | null = null;
   isEditable = false;
 
-  constructor(public popupService: PopupService, private cardService: CardService, private destroyRef: DestroyRef) {
+  constructor(public popupService: PopupService, private cardService: CardService,
+    private destroyRef: DestroyRef) {
     this.popupService.character$
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(value => {
-      this.currentCharacter = value;
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => {
+        this.currentCharacter = value;
 
-      this.form = new FormGroup({
-        status: new FormControl(this.currentCharacter?.status, { updateOn: 'blur' }),
-        species: new FormControl(this.currentCharacter?.species, { updateOn: 'blur' }),
-        gender: new FormControl(this.currentCharacter?.gender, { updateOn: 'blur' }),
-        origin: new FormControl(this.currentCharacter?.origin.name, { updateOn: 'blur' }),
-        location: new FormControl(this.currentCharacter?.location.name, { updateOn: 'blur' }),
+        this.form = new FormGroup({
+          status: new FormControl(this.currentCharacter?.status, { updateOn: 'blur' }),
+          species: new FormControl(this.currentCharacter?.species, { updateOn: 'blur' }),
+          gender: new FormControl(this.currentCharacter?.gender, { updateOn: 'blur' }),
+          origin: new FormControl(this.currentCharacter?.origin.name, { updateOn: 'blur' }),
+          location: new FormControl(this.currentCharacter?.location.name, { updateOn: 'blur' }),
+        });
       });
-    });
 
     this.cardService.allCards$
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(cards => {
-      if (cards) {
-        this.allCardsResponse = cards;
-      }
-    })
-  }
-
-  close(event: Event): void {
-    event.stopPropagation();
-    const target = event.target;
-
-    if (target && target instanceof HTMLElement) {
-      this.popupService.handle(target);
-    }
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(cards => {
+        if (cards) {
+          this.allCardsResponse = cards;
+        }
+      })
   }
 
   updateData(): void {
     this.isEditable = true;
 
     this.form?.valueChanges
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(value => {
-      this.updatedCharacter = { ...value };
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => {
+        this.updatedCharacter = { ...value };
 
-      if (this.updatedCharacter && this.currentCharacter) {
-        this.currentCharacter = {
-          ...this.currentCharacter,
-          ...this.updatedCharacter,
-          location: { ...this.currentCharacter.location },
-          origin: { ...this.currentCharacter.origin },
-        };
+        if (this.updatedCharacter && this.currentCharacter) {
+          this.currentCharacter = {
+            ...this.currentCharacter,
+            ...this.updatedCharacter,
+            location: { ...this.currentCharacter.location },
+            origin: { ...this.currentCharacter.origin },
+          };
 
-        this.currentCharacter.location.name = value.location;
-        this.currentCharacter.origin.name = value.origin;
-      }
-    });
+          this.currentCharacter.location.name = value.location;
+          this.currentCharacter.origin.name = value.origin;
+        }
+      });
   }
 
   saveData(): void {
