@@ -1,0 +1,31 @@
+@import '../../../styles.scss';
+
+.container {
+   @include flex-column();
+    font-family: Rawrote, sans-serif;
+    gap: 10px;
+    max-width: 1440px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    .search {
+        width: 250px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid black;
+        outline: none;
+        font-family: Rawrote, sans-serif;
+        font-size: 18px;
+    }
+
+    .all-cards {
+       @include flex();
+        flex-wrap: wrap;
+        gap: 30px;
+
+        .item {
+           @include flex-column();
+        }
+    }
+}

@@ -17,6 +17,14 @@ body {
     }
 }
 
+
+    .p-dialog {
+        .p-dialog-header {
+            padding: 1rem;
+        }
+    }
+
+
 @mixin flex {
     display: flex;
     align-items: center;
