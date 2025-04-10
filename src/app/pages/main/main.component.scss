@@ -1,13 +1,19 @@
 @import '../../../styles.scss';
 
 .container {
-   @include flex-column();
+    @include flex-column();
     font-family: Rawrote, sans-serif;
     gap: 10px;
     max-width: 1440px;
     padding: 20px;
     box-sizing: border-box;
     margin: 0 auto;
+
+    h1 {
+        &.dark {
+            color: #fff;
+        }
+    }
 
     .search {
         width: 250px;
@@ -20,12 +26,12 @@
     }
 
     .all-cards {
-       @include flex();
+        @include flex();
         flex-wrap: wrap;
         gap: 30px;
 
         .item {
-           @include flex-column();
+            @include flex-column();
         }
     }
 }

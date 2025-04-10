@@ -10,6 +10,7 @@
     box-sizing: border-box;
     width: 250px;
     height: 350px;
+    background-color: #fff;
     transition: transform 0.5s linear;
     cursor: pointer;
 
@@ -36,6 +37,17 @@
 
         span {
             font-weight: bold;
+        }
+    }
+
+
+    &.dark {
+        background-color: $dark-color;
+        box-shadow: 0px 0 10px #fff;
+        color: #fff;
+
+        .card-info {
+            background-color: $dark-color;
         }
     }
 }

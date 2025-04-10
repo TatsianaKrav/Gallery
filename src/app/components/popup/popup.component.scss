@@ -39,7 +39,6 @@
 
         img {
             width: 100%;
-            /*        max-height: 40dvh; */
             object-fit: cover;
             object-position: center;
             aspect-ratio: 2/1;
@@ -64,6 +63,18 @@
                 label {
                     font-weight: bold;
                 }
+            }
+        }
+    }
+
+    &.dark {
+        .card {
+            background-color: $dark-color;
+            color: #fff;
+
+            .card-info {
+                background-color: $dark-color;
+                color: #fff;
             }
         }
     }

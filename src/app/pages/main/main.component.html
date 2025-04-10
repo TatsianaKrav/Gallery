@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="gallery-name">The Rick and Morty</h1>
+    <h1 class="gallery-name" [class.dark]="!themeService.lightOn$.getValue()">The Rick and Morty</h1>
     <input type="text" class="search" placeholder="Character name" [formControl]="nameControl">
     <div class="all-cards">
       <app-error></app-error>

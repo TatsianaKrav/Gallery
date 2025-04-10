@@ -5,6 +5,7 @@ import { PopupService } from '../../services/popup.service';
 import { CommonModule } from '@angular/common';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PopupComponent } from '../popup/popup.component';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-card',
@@ -18,7 +19,7 @@ export class CardComponent {
   readonly card = input.required<CharacterModel>();
   ref: DynamicDialogRef | undefined;
 
-  constructor(private cardService: CardService, public popupService: PopupService,
+  constructor(public themeService: ThemeService, private cardService: CardService, public popupService: PopupService,
     private dialogService: DialogService) {
   }
 

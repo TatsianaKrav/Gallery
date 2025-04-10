@@ -7,6 +7,7 @@ import { CardService } from '../../services/card.service';
 import { CommonPaginationResponse } from '../../models/common-pagination-response';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InputTextModule } from 'primeng/inputtext';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-popup',
@@ -22,8 +23,8 @@ export class PopupComponent {
   form: FormGroup | null = null;
   isEditable = false;
 
-  constructor(public popupService: PopupService, private cardService: CardService,
-    private destroyRef: DestroyRef) {
+  constructor(public popupService: PopupService, public themeService: ThemeService,
+    private cardService: CardService, private destroyRef: DestroyRef) {
     this.popupService.character$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(value => {

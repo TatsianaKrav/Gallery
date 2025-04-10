@@ -16,6 +16,7 @@ import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from '../../app.component';
 import { appConfig } from '../../app.config';
 import { RouterModule } from '@angular/router';
+import { ThemeService } from '../../services/theme.service';
 
 bootstrapApplication(AppComponent, appConfig);
 
@@ -43,7 +44,7 @@ export class MainComponent {
   isLoading = true;
   notifier = new Subject();
 
-  constructor(private cardService: CardService, private errorService: ErrorService,
+  constructor(public themeService: ThemeService, private cardService: CardService, private errorService: ErrorService,
     public popupService: PopupService, private destroyRef: DestroyRef
   ) {
 

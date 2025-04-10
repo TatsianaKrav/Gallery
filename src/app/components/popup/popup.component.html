@@ -1,4 +1,4 @@
-<div class="popup">
+<div class="popup" [class.dark]="!themeService.lightOn$.getValue()">
     <div class="popup-actions">
         <button class="edit btn" [disabled]="isEditable" (click)="updateData()">Edit</button>
         <button class="view btn" [disabled]="!isEditable" (click)="saveData()">Save</button>

@@ -1,0 +1,13 @@
+@import '../../../styles.scss';
+
+.header {
+    padding: 15px;
+
+    .icon-wrapper {
+        @include flex();
+        float: right;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+}
