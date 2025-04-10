@@ -8,6 +8,19 @@
     padding: 0;
 }
 
+$dark-color: #575454;
+
+@mixin flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-column {
+    @include flex();
+    flex-direction: column;
+}
+
 body {
     position: relative;
     overflow-y: auto;
@@ -32,11 +45,18 @@ body {
         .p-dialog {
             position: relative;
             border: none;
+            height: fit-content !important;
 
             .p-dialog-header {
                 padding: 0;
                 position: absolute;
-                top: 34px;
+                top: 6px;
+
+                .p-dialog-header-actions {
+                    .p-button {
+                        z-index: 999;
+                    }
+                }
             }
 
             .p-dialog-content {
@@ -44,17 +64,4 @@ body {
             }
         }
     }
-}
-
-$dark-color: #575454;
-
-@mixin flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@mixin flex-column {
-    @include flex();
-    flex-direction: column;
 }
