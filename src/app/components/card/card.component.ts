@@ -25,7 +25,7 @@ export class CardComponent {
   show(event: Event): void {
     this.ref = this.dialogService.open(PopupComponent, {
       focusOnShow: false,
-      width: '50%',
+      width: '40%',
       height: '80%',
       closable: true,
       closeOnEscape: true,

@@ -37,16 +37,19 @@
         font-size: 20px;
         background-color: #fff;
 
-        .card-image {
+        img {
             width: 100%;
-            height: 30dvh;
+            /*        max-height: 40dvh; */
             object-fit: cover;
             object-position: center;
+            aspect-ratio: 2/1;
         }
 
         .card-info {
             padding: 10px 15px;
             background-color: #fff;
+            font-family: Rawrote, sans-serif;
+            font-size: 0.8em;
 
             .card-name {
                 font-weight: bold;

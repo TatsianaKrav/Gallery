@@ -15,14 +15,27 @@ body {
     &.blocked {
         overflow-y: hidden;
     }
+
+    .p-dialog-mask {
+        .p-dialog {
+            position: relative;
+            border: none;
+
+            .p-dialog-header {
+                padding: 0;
+                position: absolute;
+                top: 34px;
+            }
+
+            .p-dialog-content {
+                padding: 0;
+            }
+        }
+    }
 }
 
 
-    .p-dialog {
-        .p-dialog-header {
-            padding: 1rem;
-        }
-    }
+
 
 
 @mixin flex {
