@@ -55,6 +55,12 @@ export class PopupComponent {
     })
   }
 
+/*   get statusForm(): FormControl {
+    if (!this.form) throw new Error('no status field in form');
+    return <FormControl>this.form.get('status');
+    return this.form.get('status') as FormControl;
+  } */
+
   updateData(): void {
     this.isEditable = true;
     this.handleInputsState(true);

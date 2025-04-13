@@ -10,15 +10,12 @@
 
 $dark-color: #575454;
 
-@mixin flex {
+@mixin flex ($direction: row, $align: center, $justify:   space-between) {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@mixin flex-column {
-    @include flex();
-    flex-direction: column;
+    align-items: $align;
+    justify-content: $justify;
+    flex-direction: $direction;
+    flex-wrap: wrap;
 }
 
 body {
@@ -30,12 +27,12 @@ body {
     }
 
     &.dark {
-         background-color: #beb6b6;
+        background-color: #beb6b6;
 
-         .p-dialog-mask {
+        .p-dialog-mask {
             .p-dialog {
                 .p-dialog-content {
-                   background-color: $dark-color;
+                    background-color: $dark-color;
                 }
             }
         }

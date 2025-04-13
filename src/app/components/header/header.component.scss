@@ -1,13 +1,19 @@
 @import '../../../styles.scss';
 
 .header {
-    padding: 15px;
+    padding: 0.9rem;
 
     .icon-wrapper {
         @include flex();
+
         float: right;
-        width: 30px;
-        height: 30px;
+        width: 1.9rem;
+        height: 1.9rem;
         cursor: pointer;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 }

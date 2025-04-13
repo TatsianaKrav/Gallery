@@ -1,11 +1,12 @@
 @import '../../../styles.scss';
 
 .container {
-    @include flex-column();
+    @include flex(column);
+
     font-family: Rawrote, sans-serif;
-    gap: 10px;
+    gap: 0.6rem;
     max-width: 1440px;
-    padding: 20px;
+    padding: 1.25rem;
     box-sizing: border-box;
     margin: 0 auto;
 
@@ -16,22 +17,22 @@
     }
 
     .search {
-        width: 250px;
-        padding: 5px;
-        border-radius: 5px;
-        border: 1px solid black;
+        width: 15.6rem;
+        padding: 0.3rem;
+        border-radius: 0.3rem;
+        border: 0.06rem solid black;
         outline: none;
         font-family: Rawrote, sans-serif;
-        font-size: 18px;
+        font-size: 1.1rem;
     }
 
     .all-cards {
         @include flex();
-        flex-wrap: wrap;
-        gap: 30px;
+
+        gap: 1.9rem;
 
         .item {
-            @include flex-column();
+            @include flex(column);
         }
     }
 }
