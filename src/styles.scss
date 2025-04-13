@@ -29,16 +29,16 @@ body {
     &.dark {
         background-color: #beb6b6;
 
-        .p-dialog-mask {
+      /*   .p-dialog-mask {
             .p-dialog {
                 .p-dialog-content {
                     background-color: $dark-color;
                 }
             }
-        }
+        } */
     }
 
-    .p-dialog-mask {
+ /*    .p-dialog-mask {
         .p-dialog {
             position: relative;
             border: none;
@@ -60,5 +60,5 @@ body {
                 padding: 0;
             }
         }
-    }
+    } */
 }

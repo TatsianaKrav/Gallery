@@ -1,0 +1,17 @@
+<div class="modal">
+    <app-modal-actions></app-modal-actions>
+
+    @let character = popupService.character$ | async;
+
+    @if(character) {
+    <div class="card" [id]="character.id" characterEmit="character">
+        <img [src]="character.image" alt="character">
+
+        <div class="card-info">
+            <p class="card-name">{{character.name}}</p>
+
+            <app-form [currCharacter]="character"></app-form>
+        </div>
+    </div>
+    }
+</div>

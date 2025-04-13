@@ -23,7 +23,7 @@ export class CardComponent {
     private dialogService: DialogService) {
   }
 
-  show(event: Event): void {
+ /*  show(event: Event): void {
     this.ref = this.dialogService.open(PopupComponent, {
       focusOnShow: false,
       width: '40%',
@@ -50,7 +50,8 @@ export class CardComponent {
       }
     }
   }
-
+ */
+  
 
   handleCard(event: Event): void {
     const currentCard = event.currentTarget;

@@ -1,0 +1,20 @@
+@import '../../../styles.scss';
+
+.modal {
+    @include flex();
+
+    cursor: default;
+    position: relative;
+
+    &.dark {
+        .card {
+            background-color: $dark-color;
+            color: #fff;
+
+            .card-info {
+                background-color: $dark-color;
+                color: #fff;
+            }
+        }
+    }
+}
