@@ -10,7 +10,7 @@
 
 $dark-color: #575454;
 
-@mixin flex ($direction: row, $align: center, $justify:   space-between) {
+@mixin flex ($direction: row, $align: center, $justify: space-between) {
     display: flex;
     align-items: $align;
     justify-content: $justify;
@@ -29,16 +29,16 @@ body {
     &.dark {
         background-color: #beb6b6;
 
-      /*   .p-dialog-mask {
+        .p-dialog-mask {
             .p-dialog {
                 .p-dialog-content {
                     background-color: $dark-color;
                 }
             }
-        } */
+        }
     }
 
- /*    .p-dialog-mask {
+    .p-dialog-mask {
         .p-dialog {
             position: relative;
             border: none;
@@ -46,13 +46,13 @@ body {
 
             .p-dialog-header {
                 padding: 0;
-                position: absolute;
+                position: relative;
                 top: 6px;
 
-                .p-dialog-header-actions {
-                    .p-button {
-                        z-index: 999;
-                    }
+                .p-dialog-close-button {
+                    position: absolute;
+                    right: -0;
+                    z-index: 9999;
                 }
             }
 
@@ -60,5 +60,5 @@ body {
                 padding: 0;
             }
         }
-    } */
+    }
 }

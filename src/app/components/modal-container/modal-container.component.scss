@@ -17,4 +17,29 @@
             }
         }
     }
+
+    .card {
+        width: 100%;
+        font-size: 1.25rem;
+        background-color: #fff;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            aspect-ratio: 2/1;
+        }
+
+        .card-info {
+            padding: 0.6rem 0.9rem;
+            background-color: #fff;
+            font-family: Rawrote, sans-serif;
+            font-size: 0.8em;
+
+            .card-name {
+                font-weight: bold;
+                margin-bottom: 0.3rem;
+            }
+        }
+    }
 }
