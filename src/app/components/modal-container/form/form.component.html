@@ -1,19 +1,19 @@
 @if(form) {
 <div class="form" [formGroup]=" form">
     <label for="status"> Status:
-        <input type="text" pInputText pSize="small" id="status" formControlName="status">
+        <input type="text" pInputText pSize="small" id="status" [formControl]="getControl('status')">
     </label>
     <label for="species"> Species:
-        <input type="text" pInputText pSize="small" id="species" formControlName="species">
+        <input type="text" pInputText pSize="small" id="species" [formControl]="getControl('species')">
     </label>
     <label for="gender"> Gender:
-        <input type="text" pInputText pSize="small" id="gender" formControlName="gender">
+        <input type="text" pInputText pSize="small" id="gender" [formControl]="getControl('gender')">
     </label>
     <label for="origin"> Origin:
-        <input type="text" pInputText pSize="small" id="origin" formControlName="origin">
+        <input type="text" pInputText pSize="small" id="origin" [formControl]="getControl('origin')">
     </label>
     <label for="location"> Location:
-        <input type="text" pInputText pSize="small" id="location" formControlName="location">
+        <input type="text" pInputText pSize="small" id="location" [formControl]="getControl('location')">
     </label>
 </div>
 }

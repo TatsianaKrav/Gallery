@@ -64,7 +64,7 @@ export class FormComponent implements AfterContentChecked {
     }
   }
 
-  createForm() {
+  createForm(): void {
     this.form = new FormGroup({
       status: new FormControl(
         { value: this.currentCharacter?.status, disabled: !this.isEditable },
@@ -87,6 +87,13 @@ export class FormComponent implements AfterContentChecked {
           { updateOn: 'blur' }
         ),
     });
+  }
+
+
+  getControl(name: string): FormControl {
+    if (!this.form) throw new Error('oFrm is not found');
+
+    return this.form.get(name) as FormControl;
   }
 
   updateData(): void {
