@@ -75,6 +75,13 @@ export class MainComponent {
   }
 
   showModal(event: Event): void {
+    if (event.currentTarget instanceof HTMLElement) {
+      const currentElement = event.currentTarget.firstElementChild;
+
+      if (currentElement?.className !== 'card') return;
+    }
+
+
     this.ref = this.dialogService.open(ModalContainerComponent, {
       focusOnShow: false,
       width: '40%',

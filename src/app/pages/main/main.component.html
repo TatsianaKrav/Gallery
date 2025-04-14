@@ -6,31 +6,9 @@
 
     @for (card of (cards$ | async)?.results; track $index) {
 
-
-    @if(isLoading) {
-    <div class="item">
-      <ngx-skeleton-loader count="1" appearance="line" [theme]="{ 
-          'border-radius': '5px',
-          width: '250px',
-          height: '150px',
-          display: 'block',
-          border: '1px solid white'
-        }"></ngx-skeleton-loader>
-      <ngx-skeleton-loader count="6" appearance="line" [theme]="{ 
-          'border-radius': '5px',
-          width: '200px',
-          display: 'block',
-          border: '1px solid white'
-        }" />
-    </div>
-    } @else {
-    <app-card [card]="card" (click)="showModal($event)"></app-card>
-    }
-
+    <app-card [card]="card" (click)="showModal($event)" [isLoading]='isLoading'></app-card>
     }
 
     <app-modal-container></app-modal-container>
-
-    <!-- <app-popup></app-popup> -->
   </div>
 </div>
