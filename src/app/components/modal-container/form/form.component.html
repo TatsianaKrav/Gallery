@@ -1,19 +1,29 @@
 @if(form) {
-<div class="form" [formGroup]=" form">
-    <label for="status"> Status:
+<div class="form" [formGroup]=" form" (submit)="false">
+    <app-input-validation>
+        <span> Status:</span>
         <input type="text" pInputText pSize="small" id="status" [formControl]="getControl('status')">
-    </label>
-    <label for="species"> Species:
+    </app-input-validation>
+
+    <app-input-validation>
+        <span> Species:</span>
         <input type="text" pInputText pSize="small" id="species" [formControl]="getControl('species')">
-    </label>
-    <label for="gender"> Gender:
+    </app-input-validation>
+
+    <app-input-validation>
+        <span> Gender:</span>
         <input type="text" pInputText pSize="small" id="gender" [formControl]="getControl('gender')">
-    </label>
-    <label for="origin"> Origin:
+    </app-input-validation>
+
+    <app-input-validation>
+        <span> Origin:</span>
         <input type="text" pInputText pSize="small" id="origin" [formControl]="getControl('origin')">
-    </label>
-    <label for="location"> Location:
+    </app-input-validation>
+
+    <app-input-validation>
+        <span> Location:</span>
         <input type="text" pInputText pSize="small" id="location" [formControl]="getControl('location')">
-    </label>
+    </app-input-validation>
+
 </div>
 }

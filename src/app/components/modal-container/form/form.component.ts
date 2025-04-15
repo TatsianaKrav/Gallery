@@ -1,7 +1,7 @@
 import { AfterContentChecked, Component, DestroyRef, input, Output } from '@angular/core';
 import { PopupService } from '../../../services/popup.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CharacterModel } from '../../../models/character-model';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,11 +9,12 @@ import { FormService } from '../../../services/form-service';
 import { ACTIONS } from '../../../utils/actions';
 import { CommonPaginationResponse } from '../../../models/common-pagination-response';
 import { CardService } from '../../../services/card.service';
+import { InputValidationComponent } from './input-validation/input-validation.component';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, InputValidationComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
@@ -67,26 +68,34 @@ export class FormComponent implements AfterContentChecked {
   createForm(): void {
     this.form = new FormGroup({
       status: new FormControl(
-        { value: this.currentCharacter?.status, disabled: !this.isEditable },
-        { updateOn: 'blur' }
+        this.currentCharacter?.status,
+        {
+          validators: [Validators.required, Validators.pattern('^[Aa]live|[Dd]ead')],
+          updateOn: 'blur'
+        }
       ),
-      species: new FormControl(
-        { value: this.currentCharacter?.species, disabled: !this.isEditable },
-        { updateOn: 'blur' }
-      ),
-      gender: new FormControl(
-        { value: this.currentCharacter?.gender, disabled: !this.isEditable },
-        { updateOn: 'blur' }
+      species: new FormControl(this.currentCharacter?.species, { validators: [Validators.required], updateOn: 'blur' }),
+      gender: new FormControl(this.currentCharacter?.gender, {
+        validators: [Validators.required, Validators.pattern('^[Mm]ale|[Ff]emale')],
+        updateOn: 'blur'
+      }
       ),
       origin: new FormControl(
-        { value: this.currentCharacter?.origin.name, disabled: !this.isEditable },
-        { updateOn: 'blur' }
+        this.currentCharacter?.origin,
+        {
+          validators: [Validators.required, Validators.minLength(4)],
+          updateOn: 'blur'
+        }),
+      location: new FormControl(
+        this.currentCharacter?.location.name,
+        {
+          validators: [Validators.required, Validators.minLength(4)],
+          updateOn: 'blur'
+        }
       ),
-      location: new FormControl
-        ({ value: this.currentCharacter?.location.name, disabled: !this.isEditable },
-          { updateOn: 'blur' }
-        ),
     });
+
+    this.handleStates(false);
   }
 
 
@@ -100,7 +109,8 @@ export class FormComponent implements AfterContentChecked {
     this.handleStates(true);
 
     this.form?.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef),
+      )
       .subscribe(value => {
         this.updatedCharacter = { ...value };
 
@@ -116,14 +126,21 @@ export class FormComponent implements AfterContentChecked {
           this.currentCharacter.location.name = value.location;
           this.currentCharacter.origin.name = value.origin;
         }
-      });
+
+        if (this.form?.invalid) {
+          this.formService.isEditable$.next(false);
+        } else {
+          this.formService.isEditable$.next(true);
+        }
+      }
+      );
   }
 
   saveData(): void {
     this.handleStates(false);
 
     if (this.updatedCharacter) {
-      this.form?.patchValue(this.updatedCharacter);
+      this.form?.patchValue({ value: this.updatedCharacter, updateOn: 'blur' });
 
       if (this.allCardsResponse?.results.length) {
         const currentCard = this.allCardsResponse?.results.find(card => {
@@ -151,6 +168,7 @@ export class FormComponent implements AfterContentChecked {
 
   handleInputsState(value: boolean): void {
     if (this.form) {
+
       Object.keys(this.form.controls).forEach(ctrl => {
         if (this.form) {
           value ? this.form.controls[ctrl].enable() : this.form.controls[ctrl].disable();

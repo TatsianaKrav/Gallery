@@ -1,0 +1,12 @@
+@import '../../../../../styles.scss';
+
+.label-form {
+    @include flex(column, initial);
+
+
+    .error-message {
+       color: red;
+       font-family: Arial, Helvetica, sans-serif;
+       font-size: 0.7rem;
+    }
+}
