@@ -74,9 +74,10 @@ export class MainComponent {
 
         if (value) {
           this.cards$ = cardService.getCharacter(value?.toLowerCase());
-          this.errorService.clear();
-
+        } else {
+          this.cards$ = this.cardService.getAllCards();
         }
+        this.errorService.clear();
         this.isLoading = false;
       });
   }
@@ -121,7 +122,7 @@ export class MainComponent {
       this.popupService.popup$.next(false);
       document.body.classList.remove('blocked');
     });
-    
+
     document.body.classList.add('blocked');
   }
 }
