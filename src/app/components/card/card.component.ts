@@ -16,6 +16,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 export class CardComponent {
   readonly card = input.required<CharacterModel>();
   readonly isLoading = input.required<boolean>();
+  public ratesArray = Array.from({ length: 5 });
+  currentRate = 0;
 
   constructor(
     public themeService: ThemeService,

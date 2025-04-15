@@ -1,0 +1,23 @@
+@import '../../../../../styles.scss';
+
+.rate {
+    @include flex(row, start);
+
+    gap: 10px;
+
+    .rate-item {
+
+        svg {
+            width: 20px;
+            height: 20px;
+            transition: all 0.2s linear;
+        }
+
+
+        &.active {
+            .star {
+                fill: #F0B100;
+            }
+        }
+    }
+}

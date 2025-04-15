@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ErrorService } from '../../services/error.service';
 import { CommonModule } from '@angular/common';
 
@@ -10,5 +10,7 @@ import { CommonModule } from '@angular/common';
     styleUrl: './error.component.scss'
 })
 export class ErrorComponent {
+  readonly error = input.required<string>();
+
   constructor(public errorService: ErrorService) { }
 }

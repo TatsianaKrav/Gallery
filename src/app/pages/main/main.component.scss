@@ -28,7 +28,7 @@
     }
 
     .all-cards {
-        @include flex();
+        @include flex(row, center, center);
 
         gap: 1.9rem;
 

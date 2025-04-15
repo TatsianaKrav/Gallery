@@ -10,11 +10,18 @@ import { ACTIONS } from '../../../utils/actions';
 import { CommonPaginationResponse } from '../../../models/common-pagination-response';
 import { CardService } from '../../../services/card.service';
 import { InputValidationComponent } from './input-validation/input-validation.component';
+import { RatingComponent } from './rating/rating.component';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, InputValidationComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    InputValidationComponent,
+    RatingComponent
+  ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
@@ -93,6 +100,8 @@ export class FormComponent implements AfterContentChecked {
           updateOn: 'blur'
         }
       ),
+
+      rating: new FormControl('0')
     });
 
     this.handleStates(false);
@@ -100,7 +109,7 @@ export class FormComponent implements AfterContentChecked {
 
 
   getControl(name: string): FormControl {
-    if (!this.form) throw new Error('oFrm is not found');
+    if (!this.form) throw new Error('Form is not found');
 
     return this.form.get(name) as FormControl;
   }

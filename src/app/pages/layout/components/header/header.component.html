@@ -1,14 +1,15 @@
 <div class="header" (click)="toggleTheme()">
+    <div class="container">
+        <div class="icon-wrapper">
 
-    <div class="icon-wrapper">
+            @let theme = themeService.lightOn$.getValue();
 
-        @let theme = themeService.lightOn$.getValue();
-
-        @if(theme) {
-        <img src="../../../assets/images/sun.svg" alt="light">
-        } @else {
-        <img src="../../../assets/images/moon.svg" alt="dark">
-        }
+            @if(theme) {
+            <img src="../../../assets/images/sun.svg" alt="light">
+            } @else {
+            <img src="../../../assets/images/moon.svg" alt="dark">
+            }
+        </div>
     </div>
 
 </div>

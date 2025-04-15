@@ -6,7 +6,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 import { StyleClassModule } from 'primeng/styleclass';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { debounceTime, delay, Subject, tap } from 'rxjs';
+import { debounceTime, delay, map, Subject, tap } from 'rxjs';
 import { CardService } from '../../services/card.service';
 import { ErrorService } from '../../services/error.service';
 import { PopupService } from '../../services/popup.service';
@@ -47,15 +47,22 @@ export class MainComponent {
   notifier = new Subject();
   ref: DynamicDialogRef | undefined;
 
-  constructor(public themeService: ThemeService, private cardService: CardService, private errorService: ErrorService,
-    public popupService: PopupService, private destroyRef: DestroyRef, private dialogService: DialogService
+  constructor(
+    public themeService: ThemeService, 
+    private cardService: CardService, 
+    public errorService: ErrorService,
+    public popupService: PopupService, 
+    private destroyRef: DestroyRef, 
+    private dialogService: DialogService
   ) {
 
     this.cards$.pipe(
       delay(500),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     )
-      .subscribe(() => this.isLoading = false)
+      .subscribe((value) => {
+        this.isLoading = false;
+      })
 
     this.nameControl.valueChanges
       .pipe(

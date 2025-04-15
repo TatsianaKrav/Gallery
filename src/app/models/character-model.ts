@@ -17,4 +17,5 @@ export interface CharacterModel {
     episode: string[];
     url: string;
     created: string;
+    rating?: number
 }
