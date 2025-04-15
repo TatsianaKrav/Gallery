@@ -48,11 +48,11 @@ export class MainComponent {
   ref: DynamicDialogRef | undefined;
 
   constructor(
-    public themeService: ThemeService, 
-    private cardService: CardService, 
+    public themeService: ThemeService,
+    private cardService: CardService,
     public errorService: ErrorService,
-    public popupService: PopupService, 
-    private destroyRef: DestroyRef, 
+    public popupService: PopupService,
+    private destroyRef: DestroyRef,
     private dialogService: DialogService
   ) {
 
@@ -85,7 +85,7 @@ export class MainComponent {
     if (event.currentTarget instanceof HTMLElement) {
       const currentElement = event.currentTarget.firstElementChild;
 
-      if (currentElement?.className !== 'card') return;
+      if (!currentElement?.classList.contains('card')) return;
     }
 
 
@@ -116,5 +116,12 @@ export class MainComponent {
         });
       }
     }
+
+    this.ref.onClose.subscribe(() => {
+      this.popupService.popup$.next(false);
+      document.body.classList.remove('blocked');
+    });
+    
+    document.body.classList.add('blocked');
   }
 }

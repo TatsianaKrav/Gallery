@@ -41,5 +41,15 @@
                 margin-bottom: 0.3rem;
             }
         }
+
+        &.dark {
+            background-color: $dark-color;
+            box-shadow: 0px 0 10px #fff;
+            color: #fff;
+
+            .card-info {
+                background-color: $dark-color;
+            }
+        }
     }
 }

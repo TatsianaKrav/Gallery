@@ -1,10 +1,10 @@
-import { AfterContentChecked, Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalActionsComponent } from './modal-actions/modal-actions.component';
 import { FormComponent } from './form/form.component';
 import { PopupService } from '../../services/popup.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CharacterModel } from '../../models/character-model';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-modal-container',
@@ -15,7 +15,7 @@ import { CharacterModel } from '../../models/character-model';
 })
 export class ModalContainerComponent {
 
-  constructor(public popupService: PopupService) {
+  constructor(public popupService: PopupService, public themeService: ThemeService) {
 
   }
 

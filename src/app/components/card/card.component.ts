@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { CharacterModel } from '../../models/character-model';
-import { CardService } from '../../services/card.service';
 import { PopupService } from '../../services/popup.service';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
@@ -21,11 +20,10 @@ export class CardComponent {
 
   constructor(
     public themeService: ThemeService,
-    private cardService: CardService,
     public popupService: PopupService) {
   }
 
-  handleCard(event: Event): void {
+/*   handleCard(event: Event): void {
     const currentCard = event.currentTarget;
     const target = event.target;
     let idCharacter: string | null;
@@ -39,5 +37,5 @@ export class CardComponent {
         });
       }
     }
-  }
+  } */
 }

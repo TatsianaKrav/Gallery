@@ -13,6 +13,8 @@
     <app-card [card]="card" (click)="showModal($event)" [isLoading]='isLoading'></app-card>
     }
 
-    <app-modal-container></app-modal-container>
+    @if(popupService.popup$.getValue()) {
+      <app-modal-container></app-modal-container>
+    }
   </div>
 </div>

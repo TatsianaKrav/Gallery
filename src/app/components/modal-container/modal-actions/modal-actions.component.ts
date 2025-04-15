@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { PopupService } from '../../../services/popup.service';
 import { FormService } from '../../../services/form-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-actions',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './modal-actions.component.html',
   styleUrl: './modal-actions.component.scss'
 })

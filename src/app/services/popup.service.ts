@@ -17,7 +17,7 @@ export class PopupService {
   handle(character?: CharacterModel) {
     const currentPopupState = this.popup$.getValue();
     this.popup$.next(!currentPopupState);
-    this.body.classList.toggle('blocked');
+ /*    this.body.classList.toggle('blocked'); */
 
     if (character) {
       this.character$.next({ ...character });
