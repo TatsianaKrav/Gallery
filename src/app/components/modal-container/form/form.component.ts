@@ -138,7 +138,7 @@ export class FormComponent implements AfterContentChecked {
 
         if (this.form?.invalid) {
           this.formService.isEditable$.next(false);
-        } else {
+        } else if (this.form?.valid)  {
           this.formService.isEditable$.next(true);
         }
       }
