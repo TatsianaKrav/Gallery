@@ -58,7 +58,7 @@ export class MainComponent {
       delay(500),
       takeUntilDestroyed(this.destroyRef),
     )
-      .subscribe((value) => {
+      .subscribe(() => {
         this.isLoading = false;
       })
 

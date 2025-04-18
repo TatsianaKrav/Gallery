@@ -1,5 +1,7 @@
-<div class="header" (click)="toggleTheme()">
+<div class="header" (click)="toggleTheme()" [class.dark]="!themeService.lightOn$.getValue()">
     <div class="container">
+        <div></div>
+        <h1 class="gallery-name">The Rick and Morty</h1>
         <div class="icon-wrapper">
 
             @let theme = themeService.lightOn$.getValue();

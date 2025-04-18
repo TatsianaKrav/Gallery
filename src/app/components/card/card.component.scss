@@ -1,7 +1,7 @@
 @import '../../../styles.scss';
 
 .card {
-    @include flex(column, normal, initial);
+    @include flex(column, normal);
 
     font-size: 1rem;
     border-radius: 0.3rem;
@@ -9,7 +9,7 @@
     box-sizing: border-box;
     width: 250px;
     width: 15.6rem;
-/*     height: 22.5rem; */
+    height: 24rem;
     background-color: #fff;
     transition: transform 0.5s linear;
     cursor: pointer;
