@@ -18,6 +18,7 @@ import { ThemeService } from '../../services/theme.service';
 import { ModalContainerComponent } from "../../components/modal-container/modal-container.component";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CharacterModel } from '../../models/character-model';
+import { FormService } from '../../services/form-service';
 
 bootstrapApplication(AppComponent, appConfig);
 
@@ -51,7 +52,8 @@ export class MainComponent {
     private cardService: CardService,
     public errorService: ErrorService,
     private destroyRef: DestroyRef,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private formService: FormService
   ) {
 
     this.cards$.pipe(
@@ -120,6 +122,7 @@ export class MainComponent {
 
     this.ref.onClose.subscribe(() => {
       document.body.classList.remove('blocked');
+      this.formService.isEditable$.next(false);
     });
   }
 }

@@ -9,8 +9,8 @@
         <p> <span>Status:</span> {{cardObject.status}} </p>
         <p> <span>Species:</span> {{cardObject.species}}</p>
         <p> <span>Gender:</span> {{cardObject.gender}}</p>
-        <p> <span>Origin: </span> {{cardObject.origin.name}}</p>
-        <p> <span>Location:</span> {{cardObject.location.name}}</p>
+        <p> <span>Origin: </span> {{cardObject.origin!.name}}</p>
+        <p> <span>Location:</span> {{cardObject.location!.name}}</p>
     </div>
     <div class="rate">
         @for (item of ratesArray; track $index) {

@@ -1,6 +1,6 @@
-import { AfterContentChecked, Component, DestroyRef, input } from '@angular/core';
+import { Component, DestroyRef, input, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CharacterModel } from '../../../models/character-model';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -10,7 +10,7 @@ import { CommonPaginationResponse } from '../../../models/common-pagination-resp
 import { CardService } from '../../../services/card.service';
 import { InputValidationComponent } from './input-validation/input-validation.component';
 import { RatingComponent } from './rating/rating.component';
-import { ModalActionsComponent } from "../modal-actions/modal-actions.component";
+import { CharacterFormModel } from '../../../models/character-form-model';
 
 @Component({
   selector: 'app-character-form',
@@ -25,14 +25,34 @@ import { ModalActionsComponent } from "../modal-actions/modal-actions.component"
   templateUrl: './character-form.component.html',
   styleUrl: './character-form.component.scss'
 })
-export class CharacterFormComponent implements AfterContentChecked {
+export class CharacterFormComponent implements OnInit {
 
   readonly currCharacter = input.required<CharacterModel>();
-  updatedCharacter: Partial<CharacterModel> | null = null;
-  currentCharacter: CharacterModel | null = null;
+  currentCharacter: Partial<CharacterModel | null | undefined> = null;
   allCardsResponse: CommonPaginationResponse<CharacterModel> | null = null;
-  form: FormGroup | null = null;
+  form: FormGroup<CharacterFormModel> = new FormGroup({
+    status: new FormControl(
+      { value: '', disabled: true },
+      { validators: [Validators.required, Validators.pattern('^[Aa]live|[Dd]ead')] }
+    ),
+    species: new FormControl(
+      { value: '', disabled: true },
+      { validators: [Validators.required] }),
+    gender: new FormControl(
+      { value: '', disabled: true }, {
+      validators: [Validators.required, Validators.pattern('^[Mm]ale|[Ff]emale')]
+    }
+    ),
+    origin: new FormControl(
+      { value: '', disabled: true },
+      { validators: [Validators.required, Validators.minLength(4)] }),
+    location: new FormControl(
+      { value: '', disabled: true },
+      { validators: [Validators.required, Validators.minLength(4)] }
+    ),
 
+    rating: new FormControl({ value: '0', disabled: true })
+  });
 
   constructor(
     private destroyRef: DestroyRef,
@@ -50,89 +70,74 @@ export class CharacterFormComponent implements AfterContentChecked {
 
     this.formService.action$.subscribe(value => {
       if (value && value === ACTIONS.edit) {
-        this.updateData();
+        this.editData();
       } else if (value && value === ACTIONS.save) {
+
+        if (this.form.invalid) return;
         this.saveData();
       }
     });
   }
 
-  ngAfterContentChecked(): void {
+  ngOnInit(): void {
     this.currentCharacter = this.currCharacter();
 
-    if (this.currentCharacter && !this.form) {
-      this.createForm();
+    if (this.currentCharacter.status) {
+      this.form.controls.status.setValue(this.currentCharacter.status);
     }
+
+    if (this.currentCharacter.species) {
+      this.form.controls.species.setValue(this.currentCharacter.species);
+    }
+
+    if (this.currentCharacter.gender) {
+      this.form.controls.gender.setValue(this.currentCharacter.gender);
+    }
+
+    if (this.currentCharacter.origin?.name) {
+      this.form.controls.origin.setValue(this.currentCharacter.origin.name);
+    }
+
+    if (this.currentCharacter.location?.name) {
+      this.form.controls.location.setValue(this.currentCharacter.location.name);
+    }
+
+    this.currentCharacter.rating
+      ? this.form.controls.rating.setValue(`${this.currentCharacter.rating}`)
+      : '0';
   }
 
-  createForm(): void {
-    this.form = new FormGroup({
-      status: new FormControl(
-        this.currentCharacter?.status,
-        {
-          validators: [Validators.required, Validators.pattern('^[Aa]live|[Dd]ead')],
-          updateOn: 'blur'
-        }
-      ),
-      species: new FormControl(this.currentCharacter?.species, { validators: [Validators.required], updateOn: 'blur' }),
-      gender: new FormControl(this.currentCharacter?.gender, {
-        validators: [Validators.required, Validators.pattern('^[Mm]ale|[Ff]emale')],
-        updateOn: 'blur'
-      }
-      ),
-      origin: new FormControl(
-        this.currentCharacter?.origin,
-        {
-          validators: [Validators.required, Validators.minLength(4)],
-          updateOn: 'blur'
-        }),
-      location: new FormControl(
-        this.currentCharacter?.location.name,
-        {
-          validators: [Validators.required, Validators.minLength(4)],
-          updateOn: 'blur'
-        }
-      ),
-
-      rating: new FormControl('0')
-    });
-
-    this.handleStates(false);
-  }
-
-
-  getControl(name: string): FormControl {
-    if (!this.form) throw new Error('Form is not found');
-
-    return this.form.get(name) as FormControl;
-  }
-
-  updateData(): void {
+  editData(): void {
     this.handleStates(true);
 
-    this.form?.valueChanges
+    this.form.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(value => {
-        this.updatedCharacter = { ...value };
+        if (this.currentCharacter) {
+          if (value.status) {
+            this.currentCharacter.status = value.status;
+          }
 
-        if (this.updatedCharacter && this.currentCharacter) {
+          if (value.species) {
+            this.currentCharacter.species = value.species;
+          }
 
-          this.currentCharacter = {
-            ...this.currentCharacter,
-            ...this.updatedCharacter,
-            location: { ...this.currentCharacter.location },
-            origin: { ...this.currentCharacter.origin },
-          };
+          if (value.gender) {
+            this.currentCharacter.gender = value.gender;
+          }
 
-          this.currentCharacter.location.name = value.location;
-          this.currentCharacter.origin.name = value.origin;
-        }
+          if (value.location) {
+            this.currentCharacter.location!.name = value.location;
+          }
 
-        if (this.form?.invalid) {
-          this.formService.isEditable$.next(false);
-        } else if (this.form?.valid) {
-          this.formService.isEditable$.next(true);
+          if (value.origin) {
+            this.currentCharacter.origin!.name = value.origin;
+          }
+
+          if (value.rating) {
+            this.currentCharacter.rating = +value.rating;
+          }
         }
       }
       );
@@ -141,45 +146,39 @@ export class CharacterFormComponent implements AfterContentChecked {
   saveData(): void {
     this.handleStates(false);
 
-    if (this.updatedCharacter) {
-      this.form?.patchValue({ value: this.updatedCharacter, updateOn: 'blur' });
-
-      if (this.allCardsResponse?.results.length) {
-        const currentCard = this.allCardsResponse?.results.find(card => {
-          if (this.currentCharacter) {
-            return card.id === this.currentCharacter.id;
-          }
-
-          return null;
-        })
-
-        if (currentCard && this.updatedCharacter && this.currentCharacter) {
-          const index = this.allCardsResponse?.results.indexOf(currentCard);
-          this.allCardsResponse?.results.splice(index, 1, this.currentCharacter);
-
-          this.cardService.allCards$.next({
-            info: {
-              ...this.allCardsResponse.info
-            },
-            results: this.allCardsResponse.results
-          });
+    if (this.allCardsResponse?.results.length) {
+      const currentCard = this.allCardsResponse?.results.find(card => {
+        if (this.currentCharacter) {
+          return card.id === this.currentCharacter.id;
         }
+
+        return null;
+      })
+
+      if (currentCard && this.currentCharacter) {
+        const index = this.allCardsResponse?.results.indexOf(currentCard);
+        this.allCardsResponse.results[index] = this.currentCharacter;
+
+        this.cardService.allCards$.next({
+          info: {
+            ...this.allCardsResponse.info
+          },
+          results: this.allCardsResponse.results
+        });
       }
     }
   }
 
   handleInputsState(value: boolean): void {
-    if (this.form) {
+    Object.keys(this.form.controls).forEach(ctrl => {
 
-      Object.keys(this.form.controls).forEach(ctrl => {
-        if (this.form) {
-          value ? this.form.controls[ctrl].enable() : this.form.controls[ctrl].disable();
-        }
-      });
-    }
+      value ?
+        this.form.controls[ctrl as keyof CharacterFormModel].enable()
+        : this.form.controls[ctrl as keyof CharacterFormModel].disable();
+    });
   }
 
-  handleStates(state: boolean): void {
+  private handleStates(state: boolean): void {
     this.handleInputsState(state);
     this.formService.isEditable$.next(state);
   }
