@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import { CharacterModel } from '../../models/character-model';
-import { PopupService } from '../../services/popup.service';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -19,23 +18,6 @@ export class CardComponent {
   currentRate = 0;
 
   constructor(
-    public themeService: ThemeService,
-    public popupService: PopupService) {
+    public themeService: ThemeService) {
   }
-
-/*   handleCard(event: Event): void {
-    const currentCard = event.currentTarget;
-    const target = event.target;
-    let idCharacter: string | null;
-
-    if (currentCard && currentCard instanceof HTMLElement && target instanceof HTMLElement) {
-      idCharacter = currentCard.getAttribute('id');
-
-      if (idCharacter) {
-        this.cardService.getCharacterById(+idCharacter).subscribe(value => {
-          this.popupService.handle(value);
-        });
-      }
-    }
-  } */
 }

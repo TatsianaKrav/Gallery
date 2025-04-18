@@ -1,5 +1,6 @@
 @if(form) {
 <div class="form" [formGroup]=" form">
+    <app-modal-actions></app-modal-actions>
     <app-input-validation>
         <span> Status:</span>
         <input type="text" pInputText pSize="small" id="status" [formControl]="getControl('status')">

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PopupService } from '../../../services/popup.service';
 import { FormService } from '../../../services/form-service';
 import { CommonModule } from '@angular/common';
 
@@ -13,13 +12,8 @@ import { CommonModule } from '@angular/common';
 export class ModalActionsComponent {
   isEditable = false;
 
-  constructor(public popupService: PopupService, public formService: FormService) {
-    this.popupService.popup$.subscribe(state => {
-      if (!state) {
-        this.isEditable = false;
-        this.formService.isEditable$.next(false);
-      }
-    })
+  constructor(public formService: FormService) {
+
   }
 
   handleAction(event: Event): void {

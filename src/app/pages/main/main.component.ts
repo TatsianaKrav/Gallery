@@ -9,7 +9,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { debounceTime, delay, map, Subject, tap } from 'rxjs';
 import { CardService } from '../../services/card.service';
 import { ErrorService } from '../../services/error.service';
-import { PopupService } from '../../services/popup.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from '../../app.component';
@@ -18,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { ModalContainerComponent } from "../../components/modal-container/modal-container.component";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CharacterModel } from '../../models/character-model';
 
 bootstrapApplication(AppComponent, appConfig);
 
@@ -33,8 +33,7 @@ bootstrapApplication(AppComponent, appConfig);
     SkeletonModule,
     StyleClassModule,
     NgxSkeletonLoaderModule,
-    RouterModule,
-    ModalContainerComponent
+    RouterModule
   ],
   providers: [DialogService],
   templateUrl: './main.component.html',
@@ -51,7 +50,6 @@ export class MainComponent {
     public themeService: ThemeService,
     private cardService: CardService,
     public errorService: ErrorService,
-    public popupService: PopupService,
     private destroyRef: DestroyRef,
     private dialogService: DialogService
   ) {
@@ -83,13 +81,29 @@ export class MainComponent {
   }
 
   showModal(event: Event): void {
-    if (event.currentTarget instanceof HTMLElement) {
-      const currentElement = event.currentTarget.firstElementChild;
+    const currentCard = event.currentTarget;
+    let idCharacter: string | null = '';
+
+    if (currentCard instanceof HTMLElement) {
+      const currentElement = currentCard.firstElementChild;
 
       if (!currentElement?.classList.contains('card')) return;
+      if (currentElement) {
+        idCharacter = currentElement.getAttribute('id');
+
+        if (idCharacter) {
+          this.cardService.getCharacterById(+idCharacter).subscribe(value => {
+
+            this.renderModal(value);
+          });
+        }
+      }
     }
 
+    document.body.classList.add('blocked');
+  }
 
+  private renderModal(character: CharacterModel): void {
     this.ref = this.dialogService.open(ModalContainerComponent, {
       focusOnShow: false,
       width: '40%',
@@ -99,30 +113,13 @@ export class MainComponent {
       modal: true,
       contentStyle: { overflow: 'auto' },
       dismissableMask: true,
-      baseZIndex: 10000
+      baseZIndex: 10000,
+      data: character
     });
 
-    const currentCard = event.currentTarget;
-    const target = event.target;
-    let idCharacter: string | null = '';
-
-    if (currentCard && currentCard instanceof HTMLElement && target instanceof HTMLElement) {
-      if (currentCard.firstElementChild) {
-        idCharacter = currentCard.firstElementChild.getAttribute('id');
-      }
-
-      if (idCharacter) {
-        this.cardService.getCharacterById(+idCharacter).subscribe(value => {
-          this.popupService.handle(value);
-        });
-      }
-    }
 
     this.ref.onClose.subscribe(() => {
-      this.popupService.popup$.next(false);
       document.body.classList.remove('blocked');
     });
-
-    document.body.classList.add('blocked');
   }
 }

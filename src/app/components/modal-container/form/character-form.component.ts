@@ -1,5 +1,4 @@
-import { AfterContentChecked, Component, DestroyRef, input, Output } from '@angular/core';
-import { PopupService } from '../../../services/popup.service';
+import { AfterContentChecked, Component, DestroyRef, input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CharacterModel } from '../../../models/character-model';
@@ -11,6 +10,7 @@ import { CommonPaginationResponse } from '../../../models/common-pagination-resp
 import { CardService } from '../../../services/card.service';
 import { InputValidationComponent } from './input-validation/input-validation.component';
 import { RatingComponent } from './rating/rating.component';
+import { ModalActionsComponent } from "../modal-actions/modal-actions.component";
 
 @Component({
   selector: 'app-character-form',
@@ -20,7 +20,8 @@ import { RatingComponent } from './rating/rating.component';
     ReactiveFormsModule,
     InputTextModule,
     InputValidationComponent,
-    RatingComponent
+    RatingComponent,
+    ModalActionsComponent
   ],
   templateUrl: './character-form.component.html',
   styleUrl: './character-form.component.scss'
@@ -32,10 +33,9 @@ export class CharacterFormComponent implements AfterContentChecked {
   currentCharacter: CharacterModel | null = null;
   allCardsResponse: CommonPaginationResponse<CharacterModel> | null = null;
   form: FormGroup | null = null;
-  isEditable = false;
+
 
   constructor(
-    public popupService: PopupService,
     private destroyRef: DestroyRef,
     private formService: FormService,
     private cardService: CardService,
@@ -48,12 +48,6 @@ export class CharacterFormComponent implements AfterContentChecked {
           this.allCardsResponse = cards;
         }
       })
-
-    this.popupService.popup$.subscribe(state => {
-      if (!state) {
-        this.isEditable = false;
-      }
-    })
 
     this.formService.action$.subscribe(value => {
       if (value && value === ACTIONS.edit) {
@@ -138,7 +132,7 @@ export class CharacterFormComponent implements AfterContentChecked {
 
         if (this.form?.invalid) {
           this.formService.isEditable$.next(false);
-        } else if (this.form?.valid)  {
+        } else if (this.form?.valid) {
           this.formService.isEditable$.next(true);
         }
       }
@@ -187,9 +181,7 @@ export class CharacterFormComponent implements AfterContentChecked {
   }
 
   handleStates(state: boolean): void {
-    this.isEditable = state;
     this.handleInputsState(state);
     this.formService.isEditable$.next(state);
   }
-
 }
