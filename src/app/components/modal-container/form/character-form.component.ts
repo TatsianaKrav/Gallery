@@ -13,7 +13,7 @@ import { InputValidationComponent } from './input-validation/input-validation.co
 import { RatingComponent } from './rating/rating.component';
 
 @Component({
-  selector: 'app-form',
+  selector: 'app-character-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,10 +22,10 @@ import { RatingComponent } from './rating/rating.component';
     InputValidationComponent,
     RatingComponent
   ],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  templateUrl: './character-form.component.html',
+  styleUrl: './character-form.component.scss'
 })
-export class FormComponent implements AfterContentChecked {
+export class CharacterFormComponent implements AfterContentChecked {
 
   readonly currCharacter = input.required<CharacterModel>();
   updatedCharacter: Partial<CharacterModel> | null = null;
