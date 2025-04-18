@@ -1,5 +1,5 @@
-import { Component, forwardRef, Self } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, forwardRef, input, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-rating',
@@ -15,21 +15,38 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/for
   templateUrl: './rating.component.html',
   styleUrl: './rating.component.scss'
 })
-export class RatingComponent implements ControlValueAccessor {
+export class RatingComponent implements ControlValueAccessor, AfterViewChecked {
 
-  public currentRate = 0;
-  public disabled = false; //!!!
+  public disabled = false;
   public ratesArray = Array.from({ length: 5 });
   private onChange!: (value: number) => void;
   private onTouched!: () => void;
+  public currentRate = 0;
+  public isParentForm = true;
+  readonly updatedRate = input.required<number>();
+  @ViewChild('rate') rate!: ElementRef;
 
-  public rateChange(index: number): void {
+
+  public rateChange(event: Event, index: number): void {
+    const targetElement = event.currentTarget;
+
+    if (targetElement instanceof HTMLElement) {
+      const parent = targetElement.parentElement?.parentElement?.parentElement;
+
+      if (parent && !this.checkParent(parent)) return;
+    }
 
     if (!this.disabled) {
       this.currentRate = index;
       this.onChange(this.currentRate);
     }
   }
+
+  ngAfterViewChecked(): void {
+    const parent = this.rate.nativeElement.parentElement.parentElement;
+    this.isParentForm = this.checkParent(parent);
+  }
+
 
   public writeValue(rate: number): void {
     this.currentRate = rate;
@@ -45,5 +62,10 @@ export class RatingComponent implements ControlValueAccessor {
 
   public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  private checkParent(element: HTMLElement): boolean {
+    return (element.classList.contains('form'));
+
   }
 }

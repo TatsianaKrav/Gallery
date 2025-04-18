@@ -6,7 +6,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 import { StyleClassModule } from 'primeng/styleclass';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { debounceTime, delay, map, Subject, tap } from 'rxjs';
+import { debounceTime, delay, Subject, tap } from 'rxjs';
 import { CardService } from '../../services/card.service';
 import { ErrorService } from '../../services/error.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

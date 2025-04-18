@@ -1,7 +1,8 @@
-<div class="rate">
+<div class="rate" #rate>
+    @let rateToShow = isParentForm ? currentRate : updatedRate() ;
 
     @for (item of ratesArray; track $index) {
-    <div class="rate-item" (click)="rateChange($index + 1)" [class.active]="$index + 1 <= currentRate">
+    <div class="rate-item" (click)="rateChange($event, $index + 1)" [class.active]="$index + 1 <= rateToShow">
         <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
             image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 492.289">
             <defs>

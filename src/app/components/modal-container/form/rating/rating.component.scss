@@ -1,7 +1,7 @@
 @import '../../../../../styles.scss';
 
 .rate {
-    @include flex(row, end, end);
+    @include flex(row);
 
     gap: 10px;
     padding-top: 20px;
