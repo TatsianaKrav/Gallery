@@ -7,10 +7,11 @@
         <div class="card-info-wrapper">
             <div class="card-info">
                 <p class="card-name">{{characterResponse.name}}</p>
-                <app-modal-actions></app-modal-actions>
+                <app-modal-actions (click)="form.handleAction($event)" [isEditable]="form.isEditale">
+                </app-modal-actions>
             </div>
 
-            <app-character-form [currCharacter]="characterResponse"></app-character-form>
+            <app-character-form [currCharacter]="characterResponse" #form></app-character-form>
         </div>
     </div>
     }

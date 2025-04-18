@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FormService } from '../../../services/form-service';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,19 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './modal-actions.component.scss'
 })
 export class ModalActionsComponent {
-  isEditable = false;
-
-  constructor(public formService: FormService) {
-
-  }
-
-  handleAction(event: Event): void {
-    const targetElement = event.currentTarget;
-
-    if (targetElement && targetElement instanceof HTMLElement) {
-      const actionName = targetElement.className.split(' ')[0];
-
-      this.formService.action$.next(actionName);
-    }
-  }
+  readonly isEditable = input.required<boolean>()
 }

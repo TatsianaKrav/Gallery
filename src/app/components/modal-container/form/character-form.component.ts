@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CharacterModel } from '../../../models/character-model';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormService } from '../../../services/form-service';
 import { ACTIONS } from '../../../utils/actions';
 import { CommonPaginationResponse } from '../../../models/common-pagination-response';
 import { CardService } from '../../../services/card.service';
@@ -30,6 +29,7 @@ export class CharacterFormComponent implements OnInit {
   readonly currCharacter = input.required<CharacterModel>();
   currentCharacter: Partial<CharacterModel | null | undefined> = null;
   allCardsResponse: CommonPaginationResponse<CharacterModel> | null = null;
+  isEditale = false;
   form: FormGroup<CharacterFormModel> = new FormGroup({
     status: new FormControl(
       { value: '', disabled: true },
@@ -56,7 +56,6 @@ export class CharacterFormComponent implements OnInit {
 
   constructor(
     private destroyRef: DestroyRef,
-    private formService: FormService,
     private cardService: CardService,
   ) {
 
@@ -67,16 +66,6 @@ export class CharacterFormComponent implements OnInit {
           this.allCardsResponse = cards;
         }
       })
-
-    this.formService.action$.subscribe(value => {
-      if (value && value === ACTIONS.edit) {
-        this.editData();
-      } else if (value && value === ACTIONS.save) {
-
-        if (this.form.invalid) return;
-        this.saveData();
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -107,7 +96,24 @@ export class CharacterFormComponent implements OnInit {
       : '0';
   }
 
-  editData(): void {
+
+  public handleAction(event: Event): void {
+    const targetElement = event.target;
+
+    if (targetElement instanceof HTMLElement) {
+      const actionName = targetElement.className.split(' ')[0];
+
+      if (actionName === ACTIONS.edit) {
+        this.editData();
+      } else if (actionName === ACTIONS.save) {
+
+        if (this.form.invalid) return;
+        this.saveData();
+      }
+    }
+  }
+
+  private editData(): void {
     this.handleStates(true);
 
     this.form.valueChanges
@@ -180,6 +186,7 @@ export class CharacterFormComponent implements OnInit {
 
   private handleStates(state: boolean): void {
     this.handleInputsState(state);
-    this.formService.isEditable$.next(state);
+    this.isEditale = state;
+    /* this.formService.isEditable$.next(state); */
   }
 }

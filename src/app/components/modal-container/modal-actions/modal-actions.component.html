@@ -1,6 +1,4 @@
 <div class="modal-actions">
-    <button class="edit btn" [disabled]="formService.isEditable$.getValue()"
-        (click)="handleAction($event)">Edit</button>
-    <button class="save btn" [disabled]="!formService.isEditable$.getValue()"
-        (click)="handleAction($event)">Save</button>
-</div> 
+    <button class="edit btn" [disabled]="isEditable()">Edit</button>
+    <button class="save btn" [disabled]="!isEditable()">Save</button>
+</div>
