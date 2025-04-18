@@ -2,11 +2,13 @@
 
     @if(characterResponse) {
     <div class="card" [id]="characterResponse.id" [class.dark]="!themeService.lightOn$.getValue()">
-<!--         <app-modal-actions></app-modal-actions> -->
         <img [src]="characterResponse.image" alt="character">
 
-        <div class="card-info">
-            <p class="card-name">{{characterResponse.name}}</p>
+        <div class="card-info-wrapper">
+            <div class="card-info">
+                <p class="card-name">{{characterResponse.name}}</p>
+                <app-modal-actions></app-modal-actions>
+            </div>
 
             <app-character-form [currCharacter]="characterResponse"></app-character-form>
         </div>

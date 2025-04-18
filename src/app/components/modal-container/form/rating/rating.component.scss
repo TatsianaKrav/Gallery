@@ -1,9 +1,10 @@
 @import '../../../../../styles.scss';
 
 .rate {
-    @include flex(row, start);
+    @include flex(row, end, end);
 
     gap: 10px;
+    padding-top: 20px;
 
     .rate-item {
         cursor: pointer;
@@ -13,7 +14,6 @@
             height: 20px;
             transition: all 0.2s linear;
         }
-
 
         &.active {
             .star {

@@ -20,8 +20,7 @@ import { ModalActionsComponent } from "../modal-actions/modal-actions.component"
     ReactiveFormsModule,
     InputTextModule,
     InputValidationComponent,
-    RatingComponent,
-    ModalActionsComponent
+    RatingComponent
   ],
   templateUrl: './character-form.component.html',
   styleUrl: './character-form.component.scss'
