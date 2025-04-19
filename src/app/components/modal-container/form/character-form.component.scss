@@ -4,7 +4,6 @@
     @include flex(row, center, center);
 
     gap: 0.4rem;
-    flex-shrink: 0;
     flex-wrap: wrap;
 
     label {
