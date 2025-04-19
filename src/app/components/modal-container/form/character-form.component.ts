@@ -10,6 +10,8 @@ import { CardService } from '../../../services/card.service';
 import { InputValidationComponent } from './input-validation/input-validation.component';
 import { RatingComponent } from './rating/rating.component';
 import { CharacterFormModel } from '../../../models/character-form-model';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-character-form',
@@ -19,8 +21,10 @@ import { CharacterFormModel } from '../../../models/character-form-model';
     ReactiveFormsModule,
     InputTextModule,
     InputValidationComponent,
-    RatingComponent
+    RatingComponent,
+    ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './character-form.component.html',
   styleUrl: './character-form.component.scss'
 })
@@ -57,6 +61,7 @@ export class CharacterFormComponent implements OnInit {
   constructor(
     private destroyRef: DestroyRef,
     private cardService: CardService,
+    private messageService: MessageService
   ) {
 
     this.cardService.allCards$
@@ -109,6 +114,7 @@ export class CharacterFormComponent implements OnInit {
 
         if (this.form.invalid) return;
         this.saveData();
+        this.showInfo();
       }
     }
   }
@@ -120,6 +126,7 @@ export class CharacterFormComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(value => {
+
         if (this.currentCharacter) {
           if (value.status) {
             this.currentCharacter.status = value.status;
@@ -187,6 +194,12 @@ export class CharacterFormComponent implements OnInit {
   private handleStates(state: boolean): void {
     this.handleInputsState(state);
     this.isEditale = state;
-    /* this.formService.isEditable$.next(state); */
+  }
+
+  showInfo(): void {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Data successfully saved'
+    })
   }
 }
