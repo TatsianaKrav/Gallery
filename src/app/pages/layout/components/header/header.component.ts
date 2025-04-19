@@ -18,4 +18,12 @@ export class HeaderComponent {
     this.themeService.toggleTheme();
     this.body.classList.toggle('dark');
   }
+
+  /*  toggleTheme(): void {
+     const element = document.querySelector('html');
+ 
+     if (element) {
+       element.classList.toggle('my-app-dark');
+     }
+   } */
 }

@@ -9,9 +9,12 @@ import Aura from '@primeng/themes/aura';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideHttpClient(), provideAnimationsAsync(), providePrimeNG({
     theme: {
-        preset: Aura
+      preset: Aura,
+      options: {
+        darkModeSelector: '.my-app-dark'
+      }
     }
-})]
+  })]
 };
 
 
