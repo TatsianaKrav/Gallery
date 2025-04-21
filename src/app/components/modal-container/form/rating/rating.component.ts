@@ -31,7 +31,7 @@ export class RatingComponent implements ControlValueAccessor, AfterViewChecked {
     const targetElement = event.currentTarget;
 
     if (targetElement instanceof HTMLElement) {
-      const parent = targetElement.parentElement?.parentElement?.parentElement;
+      const parent = targetElement.parentElement?.parentElement?.parentElement?.parentElement?.parentElement;
 
       if (parent && !this.checkParent(parent)) return;
     }
@@ -65,7 +65,6 @@ export class RatingComponent implements ControlValueAccessor, AfterViewChecked {
   }
 
   private checkParent(element: HTMLElement): boolean {
-    return (element.classList.contains('form'));
-
+    return (element.classList.contains('form') || element.classList.contains('label-form'));
   }
 }

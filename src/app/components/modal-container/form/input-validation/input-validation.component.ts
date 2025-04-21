@@ -15,7 +15,8 @@ export class InputValidationComponent implements AfterContentChecked {
   validationMessages = {
     required: 'This field must to be filled',
     minlength: 'The minumum length is 4',
-    pattern: 'You must put the correct value'
+    pattern: 'You must put the correct value',
+    invalidRating: 'You must rate this character'
   }
 
 

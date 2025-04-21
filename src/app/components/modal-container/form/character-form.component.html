@@ -23,8 +23,12 @@
         <span> Location:</span>
         <input type="text" pInputText pSize="small" id="location" [formControl]="form.controls.location">
     </app-input-validation>
+    <!-- 
+    <app-rating [formControl]="form.controls.rating" [updatedRate]="0"> </app-rating> -->
 
+    <app-input-validation>
+        <app-rating [formControl]="form.controls.rating" [updatedRate]="0"> </app-rating>
+    </app-input-validation>
 
-    <app-rating [formControl]="form.controls.rating" [updatedRate]="0"></app-rating>
     <p-toast position="bottom-right"></p-toast>
 </div>

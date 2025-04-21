@@ -12,6 +12,7 @@ import { RatingComponent } from './rating/rating.component';
 import { CharacterFormModel } from '../../../models/character-form-model';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ratingValidator } from '../../../utils/validators';
 
 @Component({
   selector: 'app-character-form',
@@ -55,7 +56,7 @@ export class CharacterFormComponent implements OnInit {
       { validators: [Validators.required, Validators.minLength(4)] }
     ),
 
-    rating: new FormControl({ value: '0', disabled: true })
+    rating: new FormControl({ value: '0', disabled: true }, { validators: ratingValidator() })
   });
 
   constructor(
