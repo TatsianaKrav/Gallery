@@ -9,3 +9,17 @@ export function ratingValidator(): ValidatorFn {
         return null;
     }
 }
+
+export function genderValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        const result = /^[Mm]ale|[Ff]emale$/.test(control.value);
+        return result ? null : { genderError: true };
+    }
+}
+
+export function statusValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        const result = /^[Aa]live|[Dd]ead$/.test(control.value);
+        return result ? null : { statusError: true };
+    }
+}

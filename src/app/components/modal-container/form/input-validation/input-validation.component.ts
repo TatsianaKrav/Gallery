@@ -16,7 +16,9 @@ export class InputValidationComponent implements AfterContentChecked {
     required: 'This field must to be filled',
     minlength: 'The minumum length is 4',
     pattern: 'You must put the correct value',
-    invalidRating: 'You must rate this character'
+    invalidRating: 'You must rate this character',
+    genderError: 'The gender can be only Male or Female',
+    statusError: 'The status can be only Alive or Dead'
   }
 
 

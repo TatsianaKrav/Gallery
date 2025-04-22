@@ -12,7 +12,7 @@ import { RatingComponent } from './rating/rating.component';
 import { CharacterFormModel } from '../../../models/character-form-model';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { ratingValidator } from '../../../utils/validators';
+import { genderValidator, ratingValidator, statusValidator } from '../../../utils/validators';
 
 @Component({
   selector: 'app-character-form',
@@ -38,14 +38,14 @@ export class CharacterFormComponent implements OnInit {
   form: FormGroup<CharacterFormModel> = new FormGroup({
     status: new FormControl(
       { value: '', disabled: true },
-      { validators: [Validators.required, Validators.pattern('^[Aa]live|[Dd]ead')] }
+      { validators: [Validators.required, statusValidator()] }
     ),
     species: new FormControl(
       { value: '', disabled: true },
       { validators: [Validators.required] }),
     gender: new FormControl(
       { value: '', disabled: true }, {
-      validators: [Validators.required, Validators.pattern('^[Mm]ale|[Ff]emale')]
+      validators: [Validators.required, genderValidator()]
     }
     ),
     origin: new FormControl(
