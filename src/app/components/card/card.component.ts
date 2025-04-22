@@ -3,7 +3,8 @@ import { CharacterModel } from '../../models/character-model';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { SkeletonModule } from 'primeng/skeleton';
-import { RatingComponent } from "../modal-container/form/rating/rating.component";
+import { RatingComponent } from '../rating/rating.component';
+
 
 @Component({
   selector: 'app-card',
