@@ -10,6 +10,8 @@ export function ratingValidator(): ValidatorFn {
     }
 }
 
+// todo валидатор для пароля и потоврения пароля, повесить на группу 
+
 export function genderValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const result = /^[Mm]ale|[Ff]emale$/.test(control.value);

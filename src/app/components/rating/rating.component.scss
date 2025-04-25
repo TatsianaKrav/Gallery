@@ -20,5 +20,9 @@
                 fill: #F0B100;
             }
         }
+
+        &.disabled {
+            cursor: default;
+        }
     }
 }

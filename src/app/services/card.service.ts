@@ -16,6 +16,7 @@ export class CardService {
     private errorService: ErrorService
   ) { }
 
+  //todo добавить аргумент для пагинации 
   getAllCards(): Observable<CommonPaginationResponse<CharacterModel>> {
     return this.http.get<CommonPaginationResponse<CharacterModel>>(environment.API_URL)
       .pipe(
