@@ -1,32 +1,32 @@
 <div class="form" [formGroup]=" form">
-    <app-input-validation>
+    <app-control-wrapper>
         <span> Status:</span>
         <input type="text" pInputText pSize="small" id="status" [formControl]="form.controls.status">
-    </app-input-validation>
+    </app-control-wrapper>
 
-    <app-input-validation>
+    <app-control-wrapper>
         <span> Species:</span>
         <input type="text" pInputText pSize="small" id="species" [formControl]="form.controls.species">
-    </app-input-validation>
+    </app-control-wrapper>
 
-    <app-input-validation>
+    <app-control-wrapper>
         <span> Gender:</span>
         <input type="text" pInputText pSize="small" id="gender" [formControl]="form.controls.gender">
-    </app-input-validation>
+    </app-control-wrapper>
 
-    <app-input-validation>
+    <app-control-wrapper>
         <span> Origin:</span>
         <input type="text" pInputText pSize="small" id="origin" [formControl]="form.controls.origin">
-    </app-input-validation>
+    </app-control-wrapper>
 
-    <app-input-validation>
+    <app-control-wrapper>
         <span> Location:</span>
         <input type="text" pInputText pSize="small" id="location" [formControl]="form.controls.location">
-    </app-input-validation>
+    </app-control-wrapper>
 
-    <app-input-validation>
+    <app-control-wrapper>
         <app-rating [formControl]="form.controls.rating" [updatedRate]="0"> </app-rating>
-    </app-input-validation>
+    </app-control-wrapper>
 
     <p-toast position="bottom-right"></p-toast>
 </div>

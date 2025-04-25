@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputValidationComponent } from './input-validation.component';
+import { InputValidationComponent } from './control-wrapper.component';
 
 describe('InputValidationComponent', () => {
   let component: InputValidationComponent;
@@ -10,7 +10,7 @@ describe('InputValidationComponent', () => {
     await TestBed.configureTestingModule({
       imports: [InputValidationComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(InputValidationComponent);
     component = fixture.componentInstance;

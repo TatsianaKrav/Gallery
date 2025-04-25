@@ -2,13 +2,13 @@ import { AfterContentChecked, Component, ContentChild } from '@angular/core';
 import { NgControl, ValidationErrors } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-validation',
+  selector: 'app-control-wrapper',
   standalone: true,
   imports: [],
-  templateUrl: './input-validation.component.html',
-  styleUrl: './input-validation.component.scss'
+  templateUrl: './control-wrapper.component.html',
+  styleUrl: './control-wrapper.component.scss'
 })
-export class InputValidationComponent implements AfterContentChecked {
+export class ControlWrapperComponent implements AfterContentChecked {
   @ContentChild(NgControl)
   ngControl: NgControl | undefined;
   errorMessage = '';

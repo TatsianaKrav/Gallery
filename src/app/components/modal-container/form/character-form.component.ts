@@ -7,12 +7,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ACTIONS } from '../../../utils/actions';
 import { CommonPaginationResponse } from '../../../models/common-pagination-response';
 import { CardService } from '../../../services/card.service';
-import { InputValidationComponent } from './input-validation/input-validation.component';
 import { CharacterFormModel } from '../../../models/character-form-model';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { genderValidator, ratingValidator, statusValidator } from '../../../utils/validators';
 import { RatingComponent } from '../../rating/rating.component';
+import { ControlWrapperComponent } from './control-wrapper/control-wrapper.component';
 
 @Component({
   selector: 'app-character-form',
@@ -21,9 +21,9 @@ import { RatingComponent } from '../../rating/rating.component';
     CommonModule,
     ReactiveFormsModule,
     InputTextModule,
-    InputValidationComponent,
     RatingComponent,
-    ToastModule
+    ToastModule,
+    ControlWrapperComponent
   ],
   providers: [MessageService],
   templateUrl: './character-form.component.html',
