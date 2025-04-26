@@ -1,30 +1,30 @@
 <div class="form" [formGroup]=" form">
-    <app-control-wrapper>
+    <app-control-wrapper [invalidForm]="invalidForm">
         <span> Status:</span>
         <input type="text" pInputText pSize="small" id="status" [formControl]="form.controls.status">
     </app-control-wrapper>
 
-    <app-control-wrapper>
+    <app-control-wrapper [invalidForm]="invalidForm">
         <span> Species:</span>
         <input type="text" pInputText pSize="small" id="species" [formControl]="form.controls.species">
     </app-control-wrapper>
 
-    <app-control-wrapper>
+    <app-control-wrapper [invalidForm]="invalidForm">
         <span> Gender:</span>
         <input type="text" pInputText pSize="small" id="gender" [formControl]="form.controls.gender">
     </app-control-wrapper>
 
-    <app-control-wrapper>
+    <app-control-wrapper [invalidForm]="invalidForm">
         <span> Origin:</span>
         <input type="text" pInputText pSize="small" id="origin" [formControl]="form.controls.origin">
     </app-control-wrapper>
 
-    <app-control-wrapper>
+    <app-control-wrapper [invalidForm]="invalidForm">
         <span> Location:</span>
         <input type="text" pInputText pSize="small" id="location" [formControl]="form.controls.location">
     </app-control-wrapper>
 
-    <app-control-wrapper>
+    <app-control-wrapper [invalidForm]="invalidForm ">
         <app-rating [formControl]="form.controls.rating" [updatedRate]="0"> </app-rating>
     </app-control-wrapper>
 

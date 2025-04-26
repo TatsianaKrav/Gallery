@@ -35,6 +35,7 @@ export class CharacterFormComponent implements OnInit {
   currentCharacter: Partial<CharacterModel | null | undefined> = null;
   allCardsResponse: CommonPaginationResponse<CharacterModel> | null = null;
   isEditale = false;
+  invalidForm = false;
   form: FormGroup<CharacterFormModel> = new FormGroup({
     status: new FormControl(
       { value: '', disabled: true },
@@ -113,7 +114,10 @@ export class CharacterFormComponent implements OnInit {
         this.editData();
       } else if (actionName === ACTIONS.save) {
 
-        if (this.form.invalid) return;
+        if (this.form.invalid) {
+          this.invalidForm = true;
+          return;
+        }
         this.saveData();
         this.showInfo();
       }
@@ -159,6 +163,7 @@ export class CharacterFormComponent implements OnInit {
 
   saveData(): void {
     this.handleStates(false);
+    this.invalidForm = false;
 
     if (this.allCardsResponse?.results.length) {
       const currentCard = this.allCardsResponse?.results.find(card => {

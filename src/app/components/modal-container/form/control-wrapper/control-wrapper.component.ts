@@ -1,5 +1,5 @@
-import { AfterContentChecked, Component, ContentChild } from '@angular/core';
-import { NgControl, ValidationErrors } from '@angular/forms';
+import { AfterContentChecked, Component, ContentChild, input } from '@angular/core';
+import { FormGroup, NgControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-control-wrapper',
@@ -9,9 +9,14 @@ import { NgControl, ValidationErrors } from '@angular/forms';
   styleUrl: './control-wrapper.component.scss'
 })
 export class ControlWrapperComponent implements AfterContentChecked {
+
+  readonly invalidForm = input.required<boolean>();
+
   @ContentChild(NgControl)
   ngControl: NgControl | undefined;
+
   errorMessage = '';
+  currentError = '';
   validationMessages = {
     required: 'This field must to be filled',
     minlength: 'The minumum length is 4',
@@ -24,21 +29,22 @@ export class ControlWrapperComponent implements AfterContentChecked {
 
   ngAfterContentChecked(): void {
     const currentError = this.ngControl?.control?.errors;
-
-    if (currentError) {
-      this.checkError(currentError);
-    } else {
-      this.errorMessage = '';
-    }
+    this.errorMessage =
+      currentError && (this.ngControl?.touched || this.ngControl?.dirty || this.invalidForm())
+        ? this.checkError(currentError)
+        : '';
   }
 
-  checkError(error: ValidationErrors): void {
+  checkError(error: ValidationErrors): string {
     const errorKey = Object.keys(error)[0];
 
     for (let [key, value] of Object.entries(this.validationMessages)) {
       if (key === errorKey) {
-        this.errorMessage = value;
+        this.currentError = key;
+        return value;
       }
     }
+
+    return '';
   }
 }

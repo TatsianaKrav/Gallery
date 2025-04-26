@@ -2,7 +2,7 @@
 
 .label-form {
     @include flex(column, initial);
-
+    width: 12rem;
 
     .error-message {
         color: red;
@@ -10,9 +10,10 @@
         font-size: 0.7rem;
         opacity: 0;
         transition: opacity 0.3s linear;
-        min-height: 0.8rem;
+        min-height: 1rem;
         visibility: visible;
-
+        text-align: center;
+        
         &.active {
             opacity: 1;
         }
