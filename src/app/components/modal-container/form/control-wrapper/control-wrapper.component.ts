@@ -1,5 +1,5 @@
 import { AfterContentChecked, Component, ContentChild, input } from '@angular/core';
-import { FormGroup, NgControl, ValidationErrors } from '@angular/forms';
+import { NgControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-control-wrapper',
@@ -17,15 +17,15 @@ export class ControlWrapperComponent implements AfterContentChecked {
 
   errorMessage = '';
   currentError = '';
+
   validationMessages = {
     required: 'This field must to be filled',
-    minlength: 'The minumum length is 4',
+    invalidLength: 'The minumum length is ',
     pattern: 'You must put the correct value',
     invalidRating: 'You must rate this character',
     genderError: 'The gender can be only Male or Female',
     statusError: 'The status can be only Alive or Dead'
   }
-
 
   ngAfterContentChecked(): void {
     const currentError = this.ngControl?.control?.errors;
@@ -33,6 +33,11 @@ export class ControlWrapperComponent implements AfterContentChecked {
       currentError && (this.ngControl?.touched || this.ngControl?.dirty || this.invalidForm())
         ? this.checkError(currentError)
         : '';
+
+
+    if (this.currentError === 'invalidLength' && currentError) {
+      this.errorMessage += ` ${currentError['invalidLength']}`
+    }
   }
 
   checkError(error: ValidationErrors): string {

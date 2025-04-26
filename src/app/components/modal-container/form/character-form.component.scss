@@ -6,7 +6,24 @@
     gap: 0.4rem;
     flex-wrap: wrap;
 
-    label {
+    .label-form {
         font-weight: bold;
+
+        input {
+            &.ng-invalid {
+                border: red;
+            }
+        }
+    }
+
+    .error-message {
+        color: red;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.7rem;
+        opacity: 1;
+        transition: opacity 0.3s linear;
+        min-height: 1rem;
+        visibility: visible;
+        text-align: center;
     }
 }

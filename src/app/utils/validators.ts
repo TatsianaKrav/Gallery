@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export function ratingValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -10,7 +10,31 @@ export function ratingValidator(): ValidatorFn {
     }
 }
 
-// todo валидатор для пароля и потоврения пароля, повесить на группу 
+
+export function lengthValidator(length: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+
+        if (control.value.length < length) {
+            return { invalidLength: length };
+        }
+        return null;
+    }
+}
+
+
+export function passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+
+        if (control instanceof FormGroup) {
+            const password = control.controls['pass'];
+            const repeatPassword = control.controls['repeatPass'];
+
+            return password.value === repeatPassword.value ? null : { invalidPassword: true }
+        }
+
+        return { invalidPassword: true };
+    }
+}
 
 export function genderValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

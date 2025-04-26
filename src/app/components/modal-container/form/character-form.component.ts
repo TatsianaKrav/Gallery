@@ -10,7 +10,7 @@ import { CardService } from '../../../services/card.service';
 import { CharacterFormModel } from '../../../models/character-form-model';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { genderValidator, ratingValidator, statusValidator } from '../../../utils/validators';
+import { genderValidator, lengthValidator, passwordValidator, ratingValidator, statusValidator } from '../../../utils/validators';
 import { RatingComponent } from '../../rating/rating.component';
 import { ControlWrapperComponent } from './control-wrapper/control-wrapper.component';
 
@@ -34,8 +34,10 @@ export class CharacterFormComponent implements OnInit {
   readonly currCharacter = input.required<CharacterModel>();
   currentCharacter: Partial<CharacterModel | null | undefined> = null;
   allCardsResponse: CommonPaginationResponse<CharacterModel> | null = null;
+
   isEditale = false;
   invalidForm = false;
+
   form: FormGroup<CharacterFormModel> = new FormGroup({
     status: new FormControl(
       { value: '', disabled: true },
@@ -51,14 +53,21 @@ export class CharacterFormComponent implements OnInit {
     ),
     origin: new FormControl(
       { value: '', disabled: true },
-      { validators: [Validators.required, Validators.minLength(4)] }),
+      { validators: [Validators.required, lengthValidator(4)] }),
     location: new FormControl(
       { value: '', disabled: true },
-      { validators: [Validators.required, Validators.minLength(4)] }
+      { validators: [Validators.required, lengthValidator(4)] }
     ),
 
-    rating: new FormControl({ value: '0', disabled: true }, { validators: ratingValidator() })
-  });
+    rating: new FormControl({ value: '0', disabled: true }, { validators: ratingValidator() }),
+
+    pass: new FormControl({ value: '', disabled: true },
+      { validators: [Validators.required, lengthValidator(8)] }),
+
+    repeatPass: new FormControl({ value: '', disabled: true },
+      { validators: [Validators.required, lengthValidator(8)] })
+
+  }, { validators: passwordValidator() });
 
   constructor(
     private destroyRef: DestroyRef,
@@ -159,6 +168,14 @@ export class CharacterFormComponent implements OnInit {
         }
       }
       );
+  }
+
+  checkPasswordError(): boolean {
+    const repeatPasswordField = this.form.controls.repeatPass;
+
+    return this.form.errors && this.form.errors['invalidPassword']
+      && repeatPasswordField.dirty
+      && (repeatPasswordField.value && repeatPasswordField.value.length === 8);
   }
 
   saveData(): void {
