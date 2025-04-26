@@ -1,16 +1,20 @@
 @import '../../../styles.scss';
 
 .container {
-    @include flex(column);
+/*     @include flex(column); */
+    @include flex(column, center, center);
 
     font-family: Rawrote, sans-serif;
-    gap: 0.6rem;
-    max-width: 1440px;
+   /*  gap: 0.6rem; */
+    gap: 1.5rem;
+    flex-wrap: nowrap; //
+  /*   max-width: 1440px; */
+    max-width: 700px;
     padding: 1.25rem;
     box-sizing: border-box;
     margin: 0 auto;
-    margin-right: 0;
-    
+ /*    margin-right: 0; */
+
     .search {
         width: 15.6rem;
         padding: 0.3rem;
@@ -30,4 +34,12 @@
             @include flex(column);
         }
     }
+}
+
+cdk-virtual-scroll-viewport {
+    @include flex(column);
+
+    height: 80dvh;
+    width: 60dvw;
+    margin: 0 auto;
 }

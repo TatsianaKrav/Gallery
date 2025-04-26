@@ -1,4 +1,4 @@
-import { Component, DestroyRef } from '@angular/core';
+import { Component, DestroyRef, ViewChild } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { ErrorComponent } from '../../components/error/error.component';
@@ -18,6 +18,8 @@ import { ThemeService } from '../../services/theme.service';
 import { ModalContainerComponent } from "../../components/modal-container/modal-container.component";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CharacterModel } from '../../models/character-model';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 bootstrapApplication(AppComponent, appConfig);
 
@@ -25,7 +27,6 @@ bootstrapApplication(AppComponent, appConfig);
   selector: 'app-main',
   standalone: true,
   imports: [
-    CardComponent,
     CommonModule,
     ErrorComponent,
     FormsModule,
@@ -33,6 +34,9 @@ bootstrapApplication(AppComponent, appConfig);
     SkeletonModule,
     StyleClassModule,
     NgxSkeletonLoaderModule,
+    ScrollingModule,
+    CardComponent,
+    CdkVirtualScrollViewport,
     RouterModule
   ],
   providers: [DialogService],
@@ -42,9 +46,15 @@ bootstrapApplication(AppComponent, appConfig);
 export class MainComponent {
   protected readonly nameControl = new FormControl('');
   cards$ = this.cardService.getAllCards();
+  allCards: CharacterModel[] = [];
   isLoading = true;
   notifier = new Subject();
   ref: DynamicDialogRef | undefined;
+  totalPages = 0;
+  pagesCount = 1;
+
+  @ViewChild(CdkVirtualScrollViewport)
+  viewport!: CdkVirtualScrollViewport;
 
   constructor(
     public themeService: ThemeService,
@@ -58,8 +68,10 @@ export class MainComponent {
       delay(500),
       takeUntilDestroyed(this.destroyRef),
     )
-      .subscribe(() => {
+      .subscribe((data) => {
         this.isLoading = false;
+        this.allCards = data.results;
+        this.totalPages = data.info.pages;
       })
 
     this.nameControl.valueChanges
@@ -78,6 +90,20 @@ export class MainComponent {
         this.errorService.clear();
         this.isLoading = false;
       });
+  }
+
+  scrollHandler(): void {
+    const end = this.viewport.getRenderedRange().end;
+    const total = this.viewport.getDataLength();
+
+    if (end === total && end > 0) {
+      if (this.pagesCount < this.totalPages) {
+        this.pagesCount++;
+        this.cardService.getCardsByPage(this.pagesCount).subscribe(data => {
+          this.allCards = this.allCards.concat(data.results)
+        });
+      }
+    }
   }
 
   showModal(event: Event): void {

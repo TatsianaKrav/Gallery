@@ -7,9 +7,9 @@
     <app-error [error]="error"></app-error>
     }
 
-    @for (card of (cards$ | async)?.results; track $index) {
-    <app-card [card]="card" (click)="showModal($event)" [isLoading]='isLoading'></app-card>
-    }
-
+    <cdk-virtual-scroll-viewport itemSize="350" (scrolledIndexChange)="scrollHandler()">
+      <app-card *cdkVirtualFor="let card of allCards" [card]="card" [isLoading]='isLoading' (click)="showModal($event)">
+      </app-card>
+    </cdk-virtual-scroll-viewport>
   </div>
 </div>

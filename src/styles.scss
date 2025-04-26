@@ -20,7 +20,7 @@ $dark-color: #575454;
 
 body {
     position: relative;
-    overflow-y: auto;
+    overflow-y: scroll;
 
     &.blocked {
         overflow-y: hidden;
@@ -54,3 +54,5 @@ body {
         }
     }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
