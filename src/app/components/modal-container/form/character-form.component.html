@@ -34,11 +34,11 @@
         <span> Repeat password:</span>
         <input type="password" pInputText pSize="small" id="r-password" [formControl]="form.controls.repeatPass"
             [class.ng-invalid]="checkPasswordError()">
-    </app-control-wrapper>
 
-    @if(checkPasswordError()) {
-    <span class="error-message">Passwords are different</span>
-    }
+        @if(checkPasswordError()) {
+        <span class="error-message">Passwords are different</span>
+        }
+    </app-control-wrapper>
 
     <app-control-wrapper [invalidForm]="invalidForm ">
         <app-rating [formControl]="form.controls.rating" [updatedRate]="0"> </app-rating>

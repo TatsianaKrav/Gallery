@@ -14,7 +14,7 @@ export function ratingValidator(): ValidatorFn {
 export function lengthValidator(length: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
 
-        if (control.value.length < length) {
+        if (control.value.length < length || control.value.length > length) {
             return { invalidLength: length };
         }
         return null;
