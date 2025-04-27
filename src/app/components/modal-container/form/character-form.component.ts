@@ -172,10 +172,11 @@ export class CharacterFormComponent implements OnInit {
 
   checkPasswordError(): boolean {
     const repeatPasswordField = this.form.controls.repeatPass;
+    const passwordField = this.form.controls.pass;
 
     return this.form.errors && this.form.errors['invalidPassword']
       && repeatPasswordField.dirty
-      && (repeatPasswordField.value && repeatPasswordField.value.length === 8);
+      && (repeatPasswordField.value && repeatPasswordField.value.length >= 8);
   }
 
   saveData(): void {

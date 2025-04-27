@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, FormGroupDirective, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export function ratingValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

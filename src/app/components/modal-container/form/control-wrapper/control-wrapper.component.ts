@@ -20,11 +20,11 @@ export class ControlWrapperComponent implements AfterContentChecked {
 
   validationMessages = {
     required: 'This field must to be filled',
-    invalidLength: 'The minumum length is ',
+    invalidLength: 'The required length is ',
     pattern: 'You must put the correct value',
     invalidRating: 'You must rate this character',
     genderError: 'The gender can be only Male or Female',
-    statusError: 'The status can be only Alive or Dead'
+    statusError: 'The status can be only Alive or Dead',
   }
 
   ngAfterContentChecked(): void {
