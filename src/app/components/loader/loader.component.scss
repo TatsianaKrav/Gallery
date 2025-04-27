@@ -4,9 +4,9 @@
     left: calc((100% - 38px)/2);
     width: 75px;
     height: 75px;
-    border: 10px solid #00ffff80;
+    border: 10px solid var(--blue-color);
     border-radius: 50%;
-    border-left-color: #02888880;
+    border-left-color: var(--dark-blue-color);
     animation: loader 1.5s linear infinite;
     z-index: 5;
     transition: all 0.5s linear;

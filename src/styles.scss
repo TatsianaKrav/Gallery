@@ -1,3 +1,5 @@
+@import './assets/styles/root.scss';
+
 @font-face {
     font-family: 'Rawrote';
     src: url('./assets/fonts/Rawrote.ttf');
@@ -7,8 +9,6 @@
     margin: 0;
     padding: 0;
 }
-
-$dark-color: #575454;
 
 @mixin flex ($direction: row, $align: center, $justify: space-between) {
     display: flex;
@@ -27,12 +27,12 @@ body {
     }
 
     &.dark {
-        background-color: #beb6b6;
+        background-color: var(--grey-color);
 
         .p-dialog-mask {
             .p-dialog {
                 .p-dialog-content {
-                    background-color: $dark-color;
+                    background-color: var(--dark-color);
                 }
             }
         }
@@ -54,5 +54,13 @@ body {
         }
     }
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
