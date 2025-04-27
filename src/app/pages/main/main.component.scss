@@ -1,19 +1,15 @@
 @import '../../../styles.scss';
 
 .container {
-/*     @include flex(column); */
     @include flex(column, center, center);
 
     font-family: Rawrote, sans-serif;
-   /*  gap: 0.6rem; */
     gap: 1.5rem;
-    flex-wrap: nowrap; //
-  /*   max-width: 1440px; */
+    flex-wrap: nowrap;
     max-width: 700px;
     padding: 1.25rem;
     box-sizing: border-box;
     margin: 0 auto;
- /*    margin-right: 0; */
 
     .search {
         width: 15.6rem;
@@ -39,7 +35,7 @@
 cdk-virtual-scroll-viewport {
     @include flex(column);
 
-    height: 80dvh;
-    width: 60dvw;
+    height: 70dvh;
+    width: 50dvw;
     margin: 0 auto;
 }

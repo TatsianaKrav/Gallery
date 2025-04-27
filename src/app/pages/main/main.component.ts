@@ -45,13 +45,13 @@ bootstrapApplication(AppComponent, appConfig);
 })
 export class MainComponent {
   protected readonly nameControl = new FormControl('');
-  cards$ = this.cardService.getAllCards();
+  pagesCount = 1;
+  totalPages = 0;
+  cards$ = this.cardService.getCardsByPage(this.pagesCount);
   allCards: CharacterModel[] = [];
   isLoading = true;
   notifier = new Subject();
   ref: DynamicDialogRef | undefined;
-  totalPages = 0;
-  pagesCount = 1;
 
   @ViewChild(CdkVirtualScrollViewport)
   viewport!: CdkVirtualScrollViewport;
@@ -83,9 +83,12 @@ export class MainComponent {
       .subscribe((value) => {
 
         if (value) {
-          this.cards$ = cardService.getCharacter(value?.toLowerCase());
+          cardService.getCharacter(value?.toLowerCase()).subscribe(data => {
+            this.allCards = data.results;
+          })
         } else {
-          this.cards$ = this.cardService.getAllCards();
+          this.pagesCount = 1;
+          this.cards$ = this.cardService.getCardsByPage(this.pagesCount);
         }
         this.errorService.clear();
         this.isLoading = false;

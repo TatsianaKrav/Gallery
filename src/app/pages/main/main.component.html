@@ -5,11 +5,12 @@
     @let error = errorService.error$ | async;
     @if(error) {
     <app-error [error]="error"></app-error>
-    }
-
+    } @else {
     <cdk-virtual-scroll-viewport itemSize="350" (scrolledIndexChange)="scrollHandler()">
       <app-card *cdkVirtualFor="let card of allCards" [card]="card" [isLoading]='isLoading' (click)="showModal($event)">
       </app-card>
     </cdk-virtual-scroll-viewport>
+    }
+
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, Subject, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { ErrorService } from './error.service';
 import { environment } from '../../environments/environment.development';
 import { CommonPaginationResponse } from '../models/common-pagination-response';
@@ -15,14 +15,6 @@ export class CardService {
   constructor(private http: HttpClient,
     private errorService: ErrorService
   ) { }
-
-  //todo добавить аргумент для пагинации 
-  getAllCards(): Observable<CommonPaginationResponse<CharacterModel>> {
-    return this.http.get<CommonPaginationResponse<CharacterModel>>(environment.API_URL)
-      .pipe(
-        tap(value => this.allCards$.next({ ...value }))
-      )
-  }
 
   getCardsByPage(page: number): Observable<CommonPaginationResponse<CharacterModel>> {
     let params = new HttpParams();
