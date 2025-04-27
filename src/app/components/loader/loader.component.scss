@@ -1,0 +1,27 @@
+.loader {
+    position: fixed;
+    top: calc((100% - 102px)/2);
+    left: calc((100% - 38px)/2);
+    width: 75px;
+    height: 75px;
+    border: 10px solid #00ffff80;
+    border-radius: 50%;
+    border-left-color: #02888880;
+    animation: loader 1.5s linear infinite;
+    z-index: 5;
+    transition: all 0.5s linear;
+    opacity: 0;
+    visibility: hidden;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+@keyframes loader {
+    100% {
+        transform: rotate(360deg);
+    }
+}

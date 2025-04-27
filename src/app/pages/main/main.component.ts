@@ -20,6 +20,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CharacterModel } from '../../models/character-model';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 bootstrapApplication(AppComponent, appConfig);
 
@@ -37,7 +38,8 @@ bootstrapApplication(AppComponent, appConfig);
     ScrollingModule,
     CardComponent,
     CdkVirtualScrollViewport,
-    RouterModule
+    RouterModule,
+    LoaderComponent
   ],
   providers: [DialogService],
   templateUrl: './main.component.html',
@@ -50,6 +52,7 @@ export class MainComponent {
   cards$ = this.cardService.getCardsByPage(this.pagesCount);
   allCards: CharacterModel[] = [];
   isLoading = true;
+  loader = false;
   notifier = new Subject();
   ref: DynamicDialogRef | undefined;
 
@@ -102,9 +105,15 @@ export class MainComponent {
     if (end === total && end > 0) {
       if (this.pagesCount < this.totalPages) {
         this.pagesCount++;
-        this.cardService.getCardsByPage(this.pagesCount).subscribe(data => {
-          this.allCards = this.allCards.concat(data.results)
-        });
+        this.cardService.getCardsByPage(this.pagesCount)
+          .pipe(
+            tap(() => this.loader = true),
+            delay(300)
+          )
+          .subscribe(data => {
+            this.loader = false;
+            this.allCards = this.allCards.concat(data.results)
+          });
       }
     }
   }
