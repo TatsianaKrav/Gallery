@@ -24,7 +24,7 @@ export class CardService {
       params: params
     })
       .pipe(
-        tap(value => this.allCards$.next({ ...value }))
+        tap(value => this.allCards$.next({ ...this.allCards$.getValue(), ...value }))
       )
   }
 

@@ -6,8 +6,13 @@
     @if(error) {
     <app-error [error]="error"></app-error>
     } @else {
+
+    <!--    <app-card *ngFor="let card of cardsValues$" [card]="card" [isLoading]='isLoading'
+      (click)="showModal($event)">
+    </app-card> -->
     <cdk-virtual-scroll-viewport itemSize="350" (scrolledIndexChange)="scrollHandler()">
-      <app-card *cdkVirtualFor="let card of allCards" [card]="card" [isLoading]='isLoading' (click)="showModal($event)">
+      <app-card *cdkVirtualFor="let card of allCards" [card]="card" [isLoading]='isLoading'
+        (click)="showModal($event)">
       </app-card>
     </cdk-virtual-scroll-viewport>
     }

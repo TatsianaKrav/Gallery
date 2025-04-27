@@ -50,6 +50,7 @@ export class MainComponent {
   pagesCount = 1;
   totalPages = 0;
   cards$ = this.cardService.getCardsByPage(this.pagesCount);
+  cardsValues$: CharacterModel[] = [];
   allCards: CharacterModel[] = [];
   isLoading = true;
   loader = false;
@@ -61,7 +62,7 @@ export class MainComponent {
 
   constructor(
     public themeService: ThemeService,
-    private cardService: CardService,
+    public cardService: CardService,
     public errorService: ErrorService,
     private destroyRef: DestroyRef,
     private dialogService: DialogService,
@@ -75,6 +76,12 @@ export class MainComponent {
         this.isLoading = false;
         this.allCards = data.results;
         this.totalPages = data.info.pages;
+
+        const cards = this.cardService.allCards$.getValue();
+
+        if (cards) {
+          this.cardsValues$ = cards.results;
+        }
       })
 
     this.nameControl.valueChanges
